@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: beauty_app_backend
+    ports:
+      - "3100:3100" 
+    
+    volumes:
+      - .:/usr/src/beauty_app_backend
+      - /usr/src/app/node_modules 
+
