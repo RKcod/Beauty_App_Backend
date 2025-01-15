@@ -2,10 +2,27 @@ version: '3.8'
 
 services:
   app:
-    build: .
+    build: 
+      context: .
+      dockerfile: Dockerfile.node
     container_name: beauty_app_backend
     ports:
       - "3100:3100" 
+
+  db:
+    image: postgres
+    restart: always
+    shm_size: 128mb
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASS}
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
     
     volumes:
       - .:/usr/src/beauty_app_backend
