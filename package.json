@@ -4,12 +4,23 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "create:module": "node generateModule.js",
+    "migrate:all": "npx knex migrate:latest --knexfile knexfile.js",
+    "migrate:rollback": "npx knex migrate:rollback --knexfile knexfile.js",
+    "migrate:make": "npx knex migrate:make",
+    "migrate:up": "npx knex migrate:up --knexfile knexfile.js",
+    "migrate:down": "npx knex migrate:down --knexfile knexfile.js",
+    "seed:run": "npx knex seed:run --knexfile knexfile.js",
+    "seed:make": "npx knex seed:make",
+    "seed:run-specific": "npx knex seed:run --knexfile knexfile.js --specific"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "knex": "^3.1.0",
+    "pg": "^8.13.1"
   }
 }
