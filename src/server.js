@@ -1,8 +1,29 @@
 // server.js
 const express = require('express');
 const app = express();
+const cors = require("cors");
+const helmet = require("helmet");
+const morgan = require("morgan");
+const dotenv = require("dotenv");
 const PORT = 3100;
+const userRoutes = require('../src/modules/user/interfaces/routes/userRoutes');
 
+dotenv.config(); // Charger les variables d'environnement
+
+// === MIDDLEWARES ===
+// Sécurité avec Helmet
+app.use(helmet());
+
+// Activer CORS (pour permettre les requêtes d'autres domaines)
+app.use(cors());
+
+// Logger les requêtes HTTP
+app.use(morgan("dev"));
+
+// Pour gérer les requêtes JSON
+app.use(express.json());
+
+app.use("/api/v1", [userRoutes]);
 // define the route
 app.get('/',
     (req, res) => {

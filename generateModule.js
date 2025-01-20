@@ -21,8 +21,6 @@ const moduleTemplate = (moduleName) => ({
         `/repositories/${moduleName}Repository.js`,
         `/services/${moduleName}Service.js`,
         `/providers/${moduleName}Provider.js`,
-        `/migrations/create_${moduleName.toLowerCase()}_table.js`,
-        `/seeders/${moduleName.toLowerCase()}Seeder.js`,
     ],
     helpers: [
         `/helpers/format${moduleName}.js`,
