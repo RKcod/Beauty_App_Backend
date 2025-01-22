@@ -27,7 +27,7 @@ class AuthUseCase {
         // Rechercher l'utilisateur
         const user = await UserRepository.findByEmail(email);
         if (!user) {
-            throw new Error('Utilisateur non trouvé.');
+            throw new Error('This user is not found.');
         }
 
         // Vérifier le mot de passe
