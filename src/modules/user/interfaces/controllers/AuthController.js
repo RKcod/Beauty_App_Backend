@@ -34,7 +34,9 @@ class AuthController {
       // Exécuter le cas d'utilisation
       const response = await AuthUseCase.login(req.body);
 
-      return res.status(200).json(response);
+      return res
+        .status(200)
+        .json({ message: "user connected successfully", response });
     } catch (error) {
       return res.status(400).json({ error: error.message });
     }

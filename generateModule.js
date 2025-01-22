@@ -28,6 +28,8 @@ const moduleTemplate = (moduleName) => ({
     interfaces: [
         `/controllers/${moduleName}Controller.js`,
         `/routes/${moduleName.toLowerCase()}Routes.js`,
+        `/middlewares/${moduleName.toLowerCase()}Middleware.js`,
+        `/resources/${moduleName.toLowerCase()}Resource.js`,
     ],
 });
 
