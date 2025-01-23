@@ -11,8 +11,16 @@ class UserRepository {
   }
 
   
-  static async getAll() {
-    return db(UserModel.getTableName()).select("*");
+  static async getAll(userPaginateFilter, page = 1, perPage = 15) {
+    let query = db(UserModel.getTableName()).select("*");
+
+    query = userPaginateFilter.applyFilters(query);
+
+    // Appliquer la pagination
+    const offset = (page - 1) * perPage;
+    query = query.limit(perPage).offset(offset);
+
+    return query;
   }
 
   static async findById(userId) {
