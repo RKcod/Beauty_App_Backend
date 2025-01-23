@@ -1,7 +1,7 @@
 module.exports = class GetAllUsersResource {
     static toResource(user) {
         return {
-            id: user._id,
+            id: user.id,
             username: user.username,
             email: user.email,
             address: user.address,

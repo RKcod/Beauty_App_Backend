@@ -1,5 +1,6 @@
 const AuthRequest = require("../../application/requests/AuthRequest");
 const AuthUseCase = require("../../core/usecases/AuthUseCase");
+const Helpers = require('../../../../adapters/Helpers');
 
 class AuthController {
   static async register(req, res) {
@@ -7,6 +8,8 @@ class AuthController {
       AuthRequest.validateRegister(req.body);
 
       const user = await AuthUseCase.register(req.body);
+
+      await Helpers.sendMail(user.email , 'Welcome to Our platform .' , null);
 
       return res.status(201).json({
         message: "User created successfully.",
