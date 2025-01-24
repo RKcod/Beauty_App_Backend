@@ -1,19 +1,24 @@
 const AuthRequest = require("../../application/requests/AuthRequest");
 const AuthUseCase = require("../../core/usecases/AuthUseCase");
-const Helpers = require('../../../../adapters/Helpers');
-
+const Helpers = require("../../../../adapters/Helpers");
+const ImageUploadService = require("../../infrastructure/services/ImageUploadService");
 class AuthController {
   static async register(req, res) {
     try {
       AuthRequest.validateRegister(req.body);
 
-      const users = await AuthUseCase.register(req.body);
+      if (req.file) {
+        ImageUploadService.validateImage(req.file);
+        req.body.image = req.file.filename;
+      }
+
+      const users = await AuthUseCase.register(req.body, req.file);
 
       const user = users[0];
 
-      console.log('user created' , user);
+      console.log("user created", user);
 
-      await Helpers.sendMail(user.email , 'Welcome to Our platform .' , null);
+      await Helpers.sendMail(user.email, "Welcome to Our platform .", null);
 
       return res.status(201).json({
         message: "User created successfully.",
@@ -21,6 +26,7 @@ class AuthController {
           id: user.id,
           username: user.username,
           email: user.email,
+          image: user.image,
           phone: user.phone,
           address: user.address,
           city: user.city,
@@ -29,6 +35,10 @@ class AuthController {
         },
       });
     } catch (error) {
+      if (req.file) {
+        await ImageUploadService.deleteImage(req.file.filename);
+      }
+
       return res.status(400).json({ error: error.message });
     }
   }
