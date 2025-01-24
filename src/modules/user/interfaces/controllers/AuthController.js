@@ -7,7 +7,11 @@ class AuthController {
     try {
       AuthRequest.validateRegister(req.body);
 
-      const user = await AuthUseCase.register(req.body);
+      const users = await AuthUseCase.register(req.body);
+
+      const user = users[0];
+
+      console.log('user created' , user);
 
       await Helpers.sendMail(user.email , 'Welcome to Our platform .' , null);
 
