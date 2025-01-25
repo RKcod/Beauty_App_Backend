@@ -12,11 +12,9 @@ class AuthController {
         req.body.image = req.file.filename;
       }
 
-      const users = await AuthUseCase.register(req.body, req.file);
+      const users = await AuthUseCase.register(req.body);
 
       const user = users[0];
-
-      console.log("user created", user);
 
       await Helpers.sendMail(user.email, "Welcome to Our platform .", null);
 
