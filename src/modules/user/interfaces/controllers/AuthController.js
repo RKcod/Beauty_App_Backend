@@ -16,7 +16,7 @@ class AuthController {
 
       const user = users[0];
 
-      await Helpers.sendMail(user.email, "Welcome to Our platform .", null);
+      await Helpers.sendMail(user, "Welcome to Our platform .", "register");
 
       return res.status(201).json({
         message: "User created successfully.",
