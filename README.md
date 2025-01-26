@@ -14,7 +14,7 @@ node generateModule.js <NomDuModule> ou npm run create:module <NomModule>
 Pour créer une migration il suffit juste d'exécuter la commande ci-dessous 
 
 ```bash
-npx knex migrate:make <nom_de_la_migration> --knexfile knexfile.js --cwd ./src/modules/nomModule/infrastructure ou npm run migrate:make <NomDeLaMigration>
+npx knex migrate:make <nom_de_la_migration> --knexfile knexfile.js  ou npm run migrate:make <NomDeLaMigration>
 ```
 
 #### 2.2 Lancer toutes les Migrations
