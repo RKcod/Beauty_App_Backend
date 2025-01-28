@@ -6,7 +6,6 @@ class ForgotPasswordController {
     try {
       const {email} = req.body;
 
-      console.log("my email", email);
       await ForgotPasswordUseCase.forgotPassword(email);
 
       return res.status(201).json({ message: "Email sent successfully" });
