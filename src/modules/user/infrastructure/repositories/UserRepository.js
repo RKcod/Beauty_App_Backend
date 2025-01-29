@@ -43,6 +43,66 @@ class UserRepository {
   static async findByCondition(condition) {
     return db(UserModel.getTableName()).where(condition);
   }
+
+
+  /**
+   * Récupère les rôles associés à un utilisateur
+   * @param {number} userId - Identifiant de l'utilisateur
+   * @returns {Promise<Array>} - Liste des rôles
+   */
+  static async getRolesByUserId(userId) {
+    return db("user_roles")
+      .join("roles", "user_roles.role_id", "roles.id")
+      .select("roles.id", "roles.name")
+      .where("user_roles.user_id", userId);
+  }
+
+  /**
+   * Associe un rôle à un utilisateur
+   * @param {number} userId - Identifiant de l'utilisateur
+   * @param {number} roleId - Identifiant du rôle
+   * @returns {Promise<Object>} - Résultat de l'insertion
+   */
+  static async assignRoleToUser(userId, roleId) {
+    return db("user_roles").insert({
+      user_id: userId,
+      role_id: roleId,
+    });
+  }
+
+  /**
+   * Supprime un rôle associé à un utilisateur
+   * @param {number} userId - Identifiant de l'utilisateur
+   * @param {number} roleId - Identifiant du rôle
+   * @returns {Promise<number>} - Nombre de lignes supprimées
+   */
+  static async removeRoleFromUser(userId, roleId) {
+    return db("user_roles")
+      .where({
+        user_id: userId,
+        role_id: roleId,
+      })
+      .del();
+  }
+
+  /**
+   * Vérifie si un utilisateur a un rôle spécifique
+   * @param {number} userId - Identifiant de l'utilisateur
+   * @param {string} roleName - Nom du rôle
+   * @returns {Promise<boolean>} - True si l'utilisateur a le rôle, false sinon
+   */
+  static async hasRole(userId, roleName) {
+    const result = await db("user_roles")
+      .join("roles", "user_roles.role_id", "roles.id")
+      .select("roles.id")
+      .where({
+        "user_roles.user_id": userId,
+        "roles.name": roleName,
+      })
+      .first();
+
+    return !!result;
+  }
 }
 
 module.exports = UserRepository;
