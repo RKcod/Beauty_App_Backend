@@ -1,5 +1,5 @@
 const AuthRequest = require("../../application/requests/AuthRequest");
-const AuthUseCase = require("../../core/usecases/AuthUseCase");
+const AuthUseCase = require("../../core/usecases/user/AuthUseCase");
 const Helpers = require("../../../../adapters/Helpers");
 const ImageUploadService = require("../../infrastructure/services/ImageUploadService");
 class AuthController {

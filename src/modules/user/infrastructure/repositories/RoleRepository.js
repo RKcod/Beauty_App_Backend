@@ -2,13 +2,20 @@ const db = require("../../../../../knexInstance");
 const RoleModel = require("../models/RoleModel");
 class RoleRepository {
  
-  static async getAllRoles() {
-    return db(RoleModel.getTableName()).select("*");
+  static async getAllRoles(rolePaginateFilter, page = 1, perPage = 15) {
+    let query = db(RoleModel.getTableName()).select("*");
+
+    query = rolePaginateFilter.applyFilters(query);
+
+    const offset = (page - 1) * perPage;
+    query = query.limit(perPage).offset(offset);
+
+    return query;
   }
 
   
-  static async findByName(roleName) {
-    return db(RoleModel.getTableName()).where({ name: roleName }).first();
+  static async findBySlug(roleSlug) {
+    return db(RoleModel.getTableName()).where({ slug: roleSlug }).first();
   }
 
   

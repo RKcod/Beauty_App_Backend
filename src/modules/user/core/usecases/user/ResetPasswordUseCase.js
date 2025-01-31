@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
-const userRepository = require("../../infrastructure/repositories/UserRepository");
-const passwordHelper = require("../../infrastructure/services/PasswordService");
+const userRepository = require("../../../infrastructure/repositories/UserRepository");
+const passwordHelper = require("../../../infrastructure/services/PasswordService");
 
 module.exports = class ResetPasswordUseCase {
   static async resetPassword(token, oldPassword, newPassword) {

@@ -1,5 +1,5 @@
 const ImageUploadService = require("../../infrastructure/services/ImageUploadService");
-const UpdateUserUseCase = require("../../core/usecases/UpdateUserUseCase");
+const UpdateUserUseCase = require("../../core/usecases/user/UpdateUserUseCase");
 module.exports = class UpdateUserController {
   static async update(req, res) {
     try {

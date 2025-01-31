@@ -1,4 +1,4 @@
-const ResetPasswordUseCase = require("../../core/usecases/ResetPasswordUseCase");
+const ResetPasswordUseCase = require("../../core/usecases/user/ResetPasswordUseCase");
 
 class ResetPasswordController {
     

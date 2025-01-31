@@ -1,4 +1,4 @@
-const UserRepository = require('../../infrastructure/repositories/UserRepository');
+const UserRepository = require('../../../infrastructure/repositories/UserRepository');
 
 class GetAllUserUseCase {
 

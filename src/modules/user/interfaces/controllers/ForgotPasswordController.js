@@ -1,4 +1,4 @@
-const ForgotPasswordUseCase = require("../../core/usecases/ForgotPasswordUseCase");
+const ForgotPasswordUseCase = require("../../core/usecases/user/ForgotPasswordUseCase");
 
 class ForgotPasswordController {
 

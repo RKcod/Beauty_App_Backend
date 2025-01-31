@@ -1,5 +1,5 @@
-const userRepository = require("../../infrastructure/repositories/UserRepository");
-const passwordService = require("../../infrastructure/services/PasswordService");
+const userRepository = require("../../../infrastructure/repositories/UserRepository");
+const passwordService = require("../../../infrastructure/services/PasswordService");
 module.exports = class UpdateUserUseCase {
   static async updateUser(id, userData) {
     const user = await userRepository.findById(id);

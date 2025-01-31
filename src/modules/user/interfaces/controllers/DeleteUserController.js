@@ -1,4 +1,4 @@
-const deleteUserUseCase = require("../../core/usecases/DeleteUserUseCase");
+const deleteUserUseCase = require("../../core/usecases/user/DeleteUserUseCase");
 
 class DeleteUserController {
   static async deleteUser(req, res) {

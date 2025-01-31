@@ -1,8 +1,7 @@
 const slugify = require("slugify");
 
 class Role {
-    constructor({ id, name, slug, description, created_at, updated_at }) {
-        this.id = id || null;
+    constructor({ name, slug, description, created_at, updated_at }) {
         this.name = name;
         this.slug = slug || this.generateSlug(name);
         this.description = description || null;

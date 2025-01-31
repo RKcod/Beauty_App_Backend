@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
-const User = require('../entities/User');
-const UserRepository = require('../../infrastructure/repositories/UserRepository');
-const passwordService = require('../../infrastructure/services/PasswordService');
+const User = require('../../entities/User');
+const UserRepository = require('../../../infrastructure/repositories/UserRepository');
+const passwordService = require('../../../infrastructure/services/PasswordService');
 
 const JWT_SECRET = process.env.JWT_SECRET ;
 
