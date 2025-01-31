@@ -1,3 +1,4 @@
+
 class PermissionModel {
     static getTableName() {
         return 'permissions';

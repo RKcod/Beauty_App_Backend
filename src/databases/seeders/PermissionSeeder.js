@@ -30,46 +30,4 @@ exports.seed = async function (knex) {
     }))
   );
 
-  const insertedPermissions = await knex("permissions").select("*");
-  console.log("Permissions inserted:", insertedPermissions);
-
-  // Assigner les permissions aux rôles
-  const roles = await knex("roles").select("id", "slug");
-  console.log("Roles fetched:", roles);
-
-  const rolePermissions = [];
-  roles.forEach((role) => {
-    if (role.slug === "visitor") {
-      rolePermissions.push(
-        { role_id: role.id, permission_id: getPermissionId("view_shop", insertedPermissions) },
-        { role_id: role.id, permission_id: getPermissionId("view_staff", insertedPermissions) }
-      );
-    } else if (role.slug === "owner") {
-      rolePermissions.push(
-        { role_id: role.id, permission_id: getPermissionId("create_shop", insertedPermissions) },
-        { role_id: role.id, permission_id: getPermissionId("view_shop", insertedPermissions) },
-        { role_id: role.id, permission_id: getPermissionId("update_shop", insertedPermissions) },
-        { role_id: role.id, permission_id: getPermissionId("delete_shop", insertedPermissions) },
-        { role_id: role.id, permission_id: getPermissionId("add_staff", insertedPermissions) },
-        { role_id: role.id, permission_id: getPermissionId("view_staff", insertedPermissions) },
-        { role_id: role.id, permission_id: getPermissionId("update_staff", insertedPermissions) },
-        { role_id: role.id, permission_id: getPermissionId("remove_staff", insertedPermissions) }
-      );
-    } else if (role.slug === "admin") {
-      insertedPermissions.forEach((permission) => {
-        rolePermissions.push({ role_id: role.id, permission_id: permission.id });
-      });
-    }
-  });
-
-  await knex("role_permissions").insert(rolePermissions);
-
-  console.log("Role permissions seeded successfully");
-};
-
-// Fonction pour obtenir l'ID de la permission
-function getPermissionId(slug, permissions) {
-  const permission = permissions.find((perm) => perm.slug === slug);
-  if (!permission) throw new Error(`Permission not found: ${slug}`);
-  return permission.id;
 }
