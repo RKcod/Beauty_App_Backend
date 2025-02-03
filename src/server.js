@@ -8,7 +8,8 @@ const dotenv = require("dotenv");
 const path = require('path');
 const PORT = 3100;
 const userRoutes = require('../src/modules/user/interfaces/routes/userRoutes');
-const roleRoutes = require('../src/modules/user/interfaces/routes/roleRoutes')
+const roleRoutes = require('../src/modules/user/interfaces/routes/roleRoutes');
+const permissionRoutes = require('../src/modules/user/interfaces/routes/permissionRoutes')
 dotenv.config(); // Charger les variables d'environnement
 
 // === MIDDLEWARES ===
@@ -26,7 +27,7 @@ app.use(express.json());
 
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
-app.use("/api/v1", [userRoutes, roleRoutes]);
+app.use("/api/v1", [userRoutes, roleRoutes, permissionRoutes]);
 // define the route
 app.get('/',
     (req, res) => {

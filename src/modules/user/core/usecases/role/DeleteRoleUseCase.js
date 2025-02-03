@@ -1,6 +1,6 @@
 const RoleRepository = require("../../../infrastructure/repositories/RoleRepository");
 module.exports = class DeleteRoleUseCase {
-  static async deleteRole(id) {
+  static async delete(id) {
     const role = await RoleRepository.findById(id);
 
     if (!role) {

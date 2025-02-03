@@ -1,7 +1,7 @@
 const RoleRepository = require("../../../infrastructure/repositories/RoleRepository");
 
 module.exports = class UpdateRoleUseCase {
-  static async updateUser(id, roleData) {
+  static async updateRole(id, roleData) {
     const role = await RoleRepository.findById(id);
 
     if (!role) {
