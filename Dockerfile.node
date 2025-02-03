@@ -7,6 +7,9 @@ WORKDIR /usr/src/beauty_app_backend
 # Copie les fichiers package.json et package-lock.json
 COPY package*.json ./
 
+# Installe le client PostgreSQL
+RUN apk add --no-cache postgresql-client
+
 # Installe les dépendances
 RUN npm install
 
