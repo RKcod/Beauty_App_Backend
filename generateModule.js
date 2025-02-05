@@ -46,8 +46,9 @@ function createModule(moduleName) {
         return;
     }
 
+    const formattedModuleName = moduleName.charAt(0).toUpperCase() + moduleName.slice(1).toLowerCase();
     const modulePath = path.join(BASE_PATH, moduleName.toLowerCase());
-    const template = moduleTemplate(moduleName);
+    const template = moduleTemplate(formattedModuleName);
 
     Object.keys(template).forEach((layer) => {
         template[layer].forEach((file) => {
