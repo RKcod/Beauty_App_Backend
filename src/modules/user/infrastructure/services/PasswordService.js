@@ -1,4 +1,5 @@
 const bcrypt = require('bcryptjs');
+const crypto = require('crypto');
 
 const PasswordService = {
     /**
@@ -20,6 +21,13 @@ const PasswordService = {
     async comparePassword(password, hash) {
         return await bcrypt.compare(password, hash);
     },
+
+    async generateTemporaryPassword(length = 10) {
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+[]{}|;:,.<>?';
+        return Array.from(crypto.randomFillSync(new Uint8Array(length)))
+            .map((x) => chars[x % chars.length])
+            .join('');
+    }
 };
 
 module.exports = PasswordService;

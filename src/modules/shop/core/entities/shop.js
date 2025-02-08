@@ -30,9 +30,7 @@ class Shop {
     if (!this.activity_domain) {
       throw new Error('Le champ "activity_domain" est obligatoire.');
     }
-    if (!this.owner_id) {
-      throw new Error("Un propriétaire (owner_id) est requis.");
-    }
+   
     if (!this.validateEmail(this.email)) {
       throw new Error("L'adresse email est invalide.");
     }

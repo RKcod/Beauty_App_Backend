@@ -34,7 +34,7 @@ const moduleTemplate = (moduleName) => ({
 });
 
 // Fonction pour créer un fichier avec du contenu par défaut
-function createFile(filePath, content = '// TODO: Implement logic') {
+function createFile(filePath, content = '') {
     fs.mkdirSync(path.dirname(filePath), { recursive: true }); // Crée les dossiers parents si nécessaire
     fs.writeFileSync(filePath, content); // Crée le fichier avec le contenu par défaut
 }
