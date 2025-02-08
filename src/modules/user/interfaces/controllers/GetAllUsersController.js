@@ -8,7 +8,7 @@ class GetAllUsersController {
     try {
 
       const userPaginateFilter = new UserPaginateFilter(req.query);
-      const users = await getAllUsersUseCase.getAll(userPaginateFilter, req.query.page || 1, 1);
+      const users = await getAllUsersUseCase.getAll(userPaginateFilter, req.query.page || 1, 15);
       const usersFormatted = getUsersResource.collection(users);
       return res.status(200).json({
         'data' :  usersFormatted
