@@ -2,7 +2,6 @@ const db = require("../../../../../knexInstance");
 const ShopModel = require("../models/ShopModel");
 
 class ShopRepository {
-  
   /**
    * Créer une boutique
    */
@@ -13,11 +12,14 @@ class ShopRepository {
   /**
    * Récupérer toutes les boutiques avec pagination
    */
-  static async getAll(page = 1, perPage = 15) {
-    return db(ShopModel.getTableName())
-      .select("*")
-      .limit(perPage)
-      .offset((page - 1) * perPage);
+  static async getAll(shopPaginateFilter, page = 1, perPage = 15) {
+    let query = db(ShopModel.getTableName()).select("*");
+
+    query = shopPaginateFilter.applyFilters(query);
+    const offset = (page - 1) * perPage;
+    query = query.limit(perPage).offset(offset);
+
+    return query;
   }
 
   /**
@@ -76,7 +78,6 @@ class ShopRepository {
       .where({ shop_id: shopId, user_type: "staff" })
       .select("*");
   }
-
 }
 
 module.exports = ShopRepository;
