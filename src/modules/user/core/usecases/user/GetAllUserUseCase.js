@@ -3,8 +3,7 @@ const UserRepository = require('../../../infrastructure/repositories/UserReposit
 class GetAllUserUseCase {
 
     static async getAll(userPaginateFilter, page = 1, perPage = 15){
-
-        return await UserRepository.getAll(userPaginateFilter, page = 1, perPage = 15);
+        return await UserRepository.getAll(userPaginateFilter, page , perPage);
     }
 }
 

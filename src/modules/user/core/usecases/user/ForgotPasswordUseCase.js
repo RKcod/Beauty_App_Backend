@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const userRepository = require("../../../infrastructure/repositories/UserRepository");
-const Helper = require("../../../../../adapters/Helpers");
+const Helper = require("../../../../../shared/Helpers");
 module.exports = class ForgotPasswordUseCase {
   static async forgotPassword(email) {
     const user = await userRepository.findByEmail(email);

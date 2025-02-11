@@ -1,5 +1,6 @@
 const db = require("../../../../../knexInstance");
 const UserModel = require("../models/UserModel");
+const paginationProvider = require('../../../../providers/PaginationProvider');
 
 class UserRepository {
   static async findByEmail(email) {
@@ -11,16 +12,12 @@ class UserRepository {
   }
 
   
-  static async getAll(userPaginateFilter, page = 1, perPage = 15) {
+  static async getAll(userPaginateFilter, page, perPage) {
     let query = db(UserModel.getTableName()).select("*");
 
     query = userPaginateFilter.applyFilters(query);
-
-    // Appliquer la pagination
-    const offset = (page - 1) * perPage;
-    query = query.limit(perPage).offset(offset);
-
-    return query;
+    
+    return paginationProvider.paginate(query, page, perPage);
   }
 
   static async findById(userId) {
