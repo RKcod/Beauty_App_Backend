@@ -1,4 +1,4 @@
-const Filter = require('../../../../../adapters/Filter');
+const Filter = require('../../../../../shared/Filter');
 
 class PhoneFilter extends Filter {
   constructor(value) {

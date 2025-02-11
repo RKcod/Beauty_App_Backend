@@ -1,4 +1,4 @@
-const Helpers = require("../../../../adapters/Helpers");
+const Helpers = require("../../../../shared/Helpers");
 const UserRepository = require("../../../user/infrastructure/repositories/UserRepository");
 const PasswordService = require("../../../user/infrastructure/services/PasswordService");
 const ShopRepository = require("../../infrastructure/repositories/ShopRepository");
