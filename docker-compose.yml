@@ -18,7 +18,7 @@ services:
       - app-network
     ports:
       - "3100:3100" 
-    command: ["scripts/wait-for-it.sh", "db:5432", "--", "node", "src/server.js"]
+    # command: ["scripts/wait-for-it.sh", "db:5432", "--", "node", "src/server.js"]
 
   db:
     image: postgres:16

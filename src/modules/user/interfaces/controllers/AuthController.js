@@ -1,6 +1,6 @@
 const AuthRequest = require("../../application/requests/AuthRequest");
 const AuthUseCase = require("../../core/usecases/user/AuthUseCase");
-const Helpers = require("../../../../adapters/Helpers");
+const Helpers = require("../../../../shared/Helpers");
 const ImageUploadService = require("../../infrastructure/services/ImageUploadService");
 class AuthController {
   static async register(req, res) {

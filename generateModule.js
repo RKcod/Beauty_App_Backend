@@ -34,7 +34,7 @@ const moduleTemplate = (moduleName) => ({
 });
 
 // Fonction pour créer un fichier avec du contenu par défaut
-function createFile(filePath, content = '// TODO: Implement logic') {
+function createFile(filePath, content = '') {
     fs.mkdirSync(path.dirname(filePath), { recursive: true }); // Crée les dossiers parents si nécessaire
     fs.writeFileSync(filePath, content); // Crée le fichier avec le contenu par défaut
 }
@@ -46,8 +46,9 @@ function createModule(moduleName) {
         return;
     }
 
+    const formattedModuleName = moduleName.charAt(0).toUpperCase() + moduleName.slice(1).toLowerCase();
     const modulePath = path.join(BASE_PATH, moduleName.toLowerCase());
-    const template = moduleTemplate(moduleName);
+    const template = moduleTemplate(formattedModuleName);
 
     Object.keys(template).forEach((layer) => {
         template[layer].forEach((file) => {
