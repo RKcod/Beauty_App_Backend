@@ -13,7 +13,7 @@ class ShopRepository {
    * Récupérer toutes les boutiques avec pagination
    */
   static async getAll(shopPaginateFilter, page = 1, perPage = 15) {
-    let query = db(ShopModel.getTableName()).select("*");
+    let query = ShopModel.query().select("*").withGraphFetched("users").debug();
 
     query = shopPaginateFilter.applyFilters(query);
     const offset = (page - 1) * perPage;

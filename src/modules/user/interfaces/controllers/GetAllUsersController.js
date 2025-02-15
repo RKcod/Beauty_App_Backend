@@ -11,6 +11,7 @@ class GetAllUsersController {
         req.query.page,
         15
       );
+
       const usersFormatted = getUsersResource.collection(users.data);
       return res.status(200).json({
         data: usersFormatted,

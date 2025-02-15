@@ -10,6 +10,13 @@ module.exports = class GetShopsResource {
             activity_domain: shop.activity_domain,
             created_at: shop.created_at,
             updated_at: shop.updated_at,
+            users: shop.users ? shop.users.map(user => ({
+                id: user.id,
+                username: user.username,
+                email: user.email,
+                phone: user.phone,
+                user_type: user.user_type,
+            })) : [], 
         };
     }
 
