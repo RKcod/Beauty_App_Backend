@@ -23,6 +23,7 @@ module.exports = class CreateShopUseCase {
       phone: phone,
     });
 
+
     if (userCreated) {
       await Helpers.sendMail(
         userCreated[0],
@@ -34,8 +35,6 @@ module.exports = class CreateShopUseCase {
     const shop = new Shop(shopData);
 
     shop.owner_id = userCreated[0].id;
-
-    console.log("shopData2", shop);
 
     const shopChecked = await ShopRepository.findByEmail(email);
 

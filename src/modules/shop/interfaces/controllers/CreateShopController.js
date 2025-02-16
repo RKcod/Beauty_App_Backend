@@ -1,4 +1,6 @@
+
 const createShopUseCase = require('../../core/usecases/CreateShopUseCase');
+
 
 module.exports = class CreateShopController {
   static async create(req, res) {
@@ -14,3 +16,4 @@ module.exports = class CreateShopController {
     }
   }
 };
+

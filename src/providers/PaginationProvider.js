@@ -1,4 +1,5 @@
 const PaginationProvider = {
+
     async paginate(query, page = 1, perPage = 15) {
       const totalResult = await query.clone().clearSelect().clearOrder().count("* as total").first();
       const total = totalResult ? parseInt(totalResult.total, 10) : 0;
@@ -34,3 +35,4 @@ const PaginationProvider = {
   
   module.exports = PaginationProvider;
   
+
