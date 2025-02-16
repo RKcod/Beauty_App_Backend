@@ -1,6 +1,6 @@
 const db = require("../../../../../knexInstance");
-const PaginationProvider = require("../../../../providers/PaginationProvider");
 const ShopModel = require("../models/ShopModel");
+const paginationProvider = require("../../../../providers/PaginationProvider");
 
 class ShopRepository {
   /**
@@ -14,10 +14,12 @@ class ShopRepository {
    * Récupérer toutes les boutiques avec pagination
    */
   static async getAll(shopPaginateFilter, page, perPage) {
-    let query = db(ShopModel.getTableName()).select("*");
+    let query = ShopModel.query().select("*").withGraphFetched("users");
 
     query = shopPaginateFilter.applyFilters(query);
-    return PaginationProvider.paginate(query, page, perPage);
+  
+
+    return paginationProvider.paginate(query, page, perPage)
   }
 
   /**
