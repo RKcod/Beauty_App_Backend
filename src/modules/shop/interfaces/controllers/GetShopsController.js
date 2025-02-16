@@ -1,3 +1,4 @@
+
 const getShopsUseCase = require("../../core/usecases/GetShopUseCase");
 const getShopsResource = require("../resources/GetShopsResourse");
 const ShopPaginateFilter = require("../../application/filters/ShopPaginateFilter");
@@ -20,6 +21,7 @@ class GetShopsController {
       return res.status(400).json({ error: error.message });
     }
   }
+
 }
 
 module.exports = GetShopsController;

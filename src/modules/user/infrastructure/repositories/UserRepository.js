@@ -1,6 +1,6 @@
 const db = require("../../../../../knexInstance");
 const UserModel = require("../models/UserModel");
-const paginationProvider = require('../../../../providers/PaginationProvider');
+const paginationProvider = require("../../../../providers/PaginationProvider");
 
 class UserRepository {
   static async findByEmail(email) {
@@ -11,12 +11,13 @@ class UserRepository {
     return db(UserModel.getTableName()).insert(userData).returning("*");
   }
 
-  
   static async getAll(userPaginateFilter, page, perPage) {
-    let query = db(UserModel.getTableName()).select("*");
-
+    let query = UserModel.query()
+      .select("users.*")
+      .withGraphFetched("shop")
+      .orderBy("users.id", "asc").debug();
     query = userPaginateFilter.applyFilters(query);
-    
+
     return paginationProvider.paginate(query, page, perPage);
   }
 
@@ -31,16 +32,13 @@ class UserRepository {
       .returning("*");
   }
 
-
   static async deleteById(userId) {
     return db(UserModel.getTableName()).where({ id: userId }).del();
   }
 
-
   static async findByCondition(condition) {
     return db(UserModel.getTableName()).where(condition);
   }
-
 
   /**
    * Récupère les rôles associés à un utilisateur

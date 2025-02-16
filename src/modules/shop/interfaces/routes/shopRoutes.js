@@ -1,3 +1,4 @@
+
 const express = require("express");
 
 const router = express.Router();
@@ -13,3 +14,4 @@ router.get("/shop/:id", authMiddleware, GetShopByIdController.getById);
 router.delete("/shop/:id", authMiddleware, DeleteShopController.delete);
 
 module.exports = router;
+

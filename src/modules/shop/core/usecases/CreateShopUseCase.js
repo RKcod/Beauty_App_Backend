@@ -23,13 +23,14 @@ module.exports = class CreateShopUseCase {
       phone: phone,
     });
 
-    // if (userCreated) {
-    //   await Helpers.sendMail(
-    //     userCreated[0],
-    //     "User Creation for a shop",
-    //     "register"
-    //   );
-    // }
+
+    if (userCreated) {
+      await Helpers.sendMail(
+        userCreated[0],
+        "User Creation for a shop",
+        "register"
+      );
+    }
 
     const shop = new Shop(shopData);
 
