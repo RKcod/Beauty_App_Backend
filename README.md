@@ -5,7 +5,7 @@
 ### 1. Création Module
 Pour générer un module avec la structure préconfigurée, utilisez la commande suivante :
 ```bash
-node generateModule.js <NomDuModule> ou npx run create:module <NomModule>
+node generateModule.js <NomDuModule> 
 ```
 
 ### 2. Gestion des Migrations
@@ -14,19 +14,19 @@ node generateModule.js <NomDuModule> ou npx run create:module <NomModule>
 Pour créer une migration il suffit juste d'exécuter la commande ci-dessous 
 
 ```bash
-npx knex migrate:make <nom_de_la_migration> --knexfile knexfile.js  ou npx run migrate:make <NomDeLaMigration>
+npx knex migrate:make <nom_de_la_migration> --knexfile knexfile.js 
 ```
 
 #### 2.2 Lancer toutes les Migrations
 
 ```bash
-npx knex migrate:latest --knexfile knexfile.js ou npx run migrate:all
+npx knex migrate:latest --knexfile knexfile.js 
 ```
 
 #### 2.3 Annuler une Migration
 
 ```bash
-npx knex migrate:rollback --knexfile knexfile.js ou npx run migrate:rollback
+npx knex migrate:rollback --knexfile knexfile.js 
 ```
 
 #### 2.4 Exécuter une migration spécifique
@@ -40,17 +40,17 @@ npx knex migrate:up --knexfile knexfile.js <NomDeLaMigration>
 #### 3.1 Création Seeder
 
 ```bash
-npx knex seed:make <nom_du_seeder> --knexfile knexfile.js ou npx knex seed:make <NomSeeder>
+npx knex seed:make <nom_du_seeder> --knexfile knexfile.js 
 ```
 
 #### 3.2 Exécuter tous les seeders
 
 ```bash
-npx knex seed:run --knexfile knexfile.js ou npx knex seed:run
+npx knex seed:run --knexfile knexfile.js 
 ```
 
 #### 3.3 Exécuter un seeder spécifique
 
 ```bash
-npx knex seed:run --knexfile knexfile.js --specific=userSeeder.js ou npx run seed:run-specific -- --specific=userSeeder.js
+npx knex seed:run --knexfile knexfile.js --specific=userSeeder.js o
 ```
