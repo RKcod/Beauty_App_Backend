@@ -11,6 +11,11 @@ const userRoutes = require("../src/modules/user/interfaces/routes/userRoutes");
 const roleRoutes = require("../src/modules/user/interfaces/routes/roleRoutes");
 const permissionRoutes = require("../src/modules/user/interfaces/routes/permissionRoutes");
 const shopRoutes = require("../src/modules/shop/interfaces/routes/shopRoutes");
+const staffRoutes = require("../src/modules/shop/interfaces/routes/staffRoutes");
+const serviceRoutes = require("../src/modules/shop/interfaces/routes/servicesRoutes");
+const serviceCategoryRoutes = require("../src/modules/shop/interfaces/routes/serviceCategoriesRoutes");
+const CategoryAssignementRoutes = require("../src/modules/shop/interfaces/routes/serviceCategoryAssignementsRoutes");
+
 dotenv.config(); // Charger les variables d'environnement
 
 // === MIDDLEWARES ===
@@ -28,7 +33,16 @@ app.use(express.json());
 
 app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
-app.use("/api/v1", [userRoutes, roleRoutes, permissionRoutes, shopRoutes]);
+app.use("/api/v1", [
+  userRoutes,
+  roleRoutes,
+  permissionRoutes,
+  shopRoutes,
+  staffRoutes,
+  serviceRoutes,
+  serviceCategoryRoutes,
+  CategoryAssignementRoutes,
+]);
 // define the route
 app.get("/", (req, res) => {
   res.send(

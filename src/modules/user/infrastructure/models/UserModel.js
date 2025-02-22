@@ -11,6 +11,7 @@ class UserModel extends BaseModel {
       shop:this.belongsTo(ShopModel,"users.shop_id","shops.id"),
     };
   }
+  
 }
 
 module.exports = UserModel;

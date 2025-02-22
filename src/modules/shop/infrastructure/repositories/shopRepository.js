@@ -17,9 +17,8 @@ class ShopRepository {
     let query = ShopModel.query().select("*").withGraphFetched("users");
 
     query = shopPaginateFilter.applyFilters(query);
-  
 
-    return paginationProvider.paginate(query, page, perPage)
+    return paginationProvider.paginate(query, page, perPage);
   }
 
   /**

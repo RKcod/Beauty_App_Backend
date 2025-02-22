@@ -4,7 +4,7 @@ const createShopUseCase = require('../../core/usecases/CreateShopUseCase');
 
 module.exports = class CreateShopController {
   static async create(req, res) {
-    const shopData = req.body;
+    const shopData = req.body;            
 
     try {
       const shop = await createShopUseCase.createShop(shopData);
