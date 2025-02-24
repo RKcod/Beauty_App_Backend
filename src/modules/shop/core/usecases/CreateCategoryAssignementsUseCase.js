@@ -2,7 +2,7 @@ const CategoryAssignementRepository = require("../../infrastructure/repositories
 
 module.exports = class CreateCategoryAssignementUseCase {
   // 🔹 Créer une catégorie
-  static async createCategoryAssignement(dada) {
-    return await CategoryAssignementRepository.create(dada);
+  static async createCategoryAssignement(CategoryAssignementDada) {
+    return await CategoryAssignementRepository.create(CategoryAssignementDada);
   }
 };

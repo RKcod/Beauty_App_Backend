@@ -2,9 +2,9 @@ const ServiceRepository = require("../../infrastructure/repositories/ServiceRepo
 
 module.exports = class DeleteServiceUseCase {
   static async deleteService(id) {
-    const shop = await ServiceRepository.findById(id);
+    const service = await ServiceRepository.findById(id);
 
-    if (!shop) {
+    if (!service) {
       throw new Error("Service not found");
     }
 

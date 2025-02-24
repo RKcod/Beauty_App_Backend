@@ -13,11 +13,10 @@ exports.up = function (knex) {
     table.text("description").nullable();
     table.decimal("price", 8, 2).nullable();
     table.integer("duration").nullable();
-    table.timestamp("created_at");
-    table.timestamp("update_at");
+    table.timestamps(true, true);
   });
 };
 
 exports.down = function (knex) {
-  return knex.schema.dropViewIfExists("services");
+  return knex.schema.dropTableIfExists("services");
 };

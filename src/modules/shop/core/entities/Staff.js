@@ -10,6 +10,12 @@ class Staff {
     if (!this.role) {
       throw new Error('Le champ "role" est obligatoire.');
     }
+    if (!this.user_id) {
+      throw new Error('Le champ "user_id" est obligatoire.');
+    }
+    if (!this.shop_id) {
+      throw new Error('Le champ " shop_id" est obligatoire.');
+    }
   }
 }
 module.exports = Staff;

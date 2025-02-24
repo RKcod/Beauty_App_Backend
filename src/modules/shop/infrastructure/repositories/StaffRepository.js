@@ -6,19 +6,34 @@ class StaffRepository {
    * Créer un staff
    */
 
+  // static async create(staffData) {
+  //   return db(StaffModel.getTableName())
+  //     .insert(staffData)
+  //     .returning("*")
+  //     .debug();
+  // }
+
   static async create(staffData) {
-    return db(StaffModel.getTableName())
-      .insert(staffData)
-      .returning("*")
-      .debug();
+    try {
+      // Insérer le staff dans la base de données
+      const [staff] = await db(StaffModel.getTableName())
+        .insert(staffData)
+        .returning("*");
+
+      // Récupérer le staff sans les relations (juste pour tester)
+      return staff;
+    } catch (error) {
+      console.error("Error creating staff:", error.message);
+      console.error("Stack trace:", error.stack);
+      throw new Error("An error occurred while creating the staff");
+    }
   }
+
   /**
    * Récupérer tout un staff avec pagination
    */
   static async getAll(staffPaginateFilter, page, perPage) {
-    let query = StaffModel.query()
-      .select("*")
-      .withGraphFetched("[users, shops]");
+    let query = StaffModel.query().select("*").withGraphFetched("[users]");
 
     query = staffPaginateFilter.applyFilters(query);
 

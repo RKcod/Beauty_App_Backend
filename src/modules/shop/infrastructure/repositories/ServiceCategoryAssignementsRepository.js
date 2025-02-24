@@ -4,10 +4,11 @@ const paginationProvider = require("../../../../providers/PaginationProvider");
 
 class ServiceCategoryAssignementRepository {
   static async create(data) {
-    return db(ServiceCategoryAssignementsModel.getTableName())
-      .insert(data)
-      .returning("*");
+ 
+      // Insertion de l'assignation dans la base de données
+      return  db(ServiceCategoryAssignementsModel.getTableName()).insert(data).returning("*");   
   }
+  
   static async getAll(dataPaginateFilter, page, perPage) {
     let query = ServiceCategoryAssignementsModel.query()
       .select("*")

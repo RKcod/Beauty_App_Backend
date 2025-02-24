@@ -1,5 +1,5 @@
 const BaseModel = require("../../../../shared/BaseModel");
-
+// const StaffModel = require("./../../../shop/infrastructure/models/StaffModel");
 class ShopModel extends BaseModel {
   static get tableName() {
     return "shops";
@@ -8,16 +8,10 @@ class ShopModel extends BaseModel {
   static get relationMappings() {
     const UserModel = require("../../../user/infrastructure/models/UserModel");
     return {
-      users: this.hasMany(UserModel, "shops.id", "users.shop_id"),
+      users: this.hasMany(UserModel, "shops.user_id", "users.id"),
+    //  staffs: this.hasMany(StaffModel, "staffs.shop_id", "shops.id"),
     };
   }
-
-  // static get relationMappings() {
-  //   const StaffModel = require("../../../staff/infrastructure/models/StaffModel");
-  //   return {
-  //     shop: this.belongsTo(StaffModel, "shops.staffs_id", "staffs.id"),
-  //   };
-  // }
 }
 
 module.exports = ShopModel;

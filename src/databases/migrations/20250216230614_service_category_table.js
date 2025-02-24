@@ -5,11 +5,10 @@ exports.up = function (knex) {
     table.increments("id").primary();
     table.string("name").nullable();
     table.text("description").nullable();
-    table.timestamp("created_at");
-    table.timestamp("update_at");
+    table.timestamps(true, true);
   });
 };
 
 exports.down = function (knex) {
-  return knex.schema.dropViewIfExists("service_categories");
+  return knex.schema.dropTableIfExists("service_categories");
 };

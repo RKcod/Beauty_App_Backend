@@ -6,7 +6,7 @@ module.exports = class GetServicesResource {
       description: service.description,
       price: service.price,
       duration: service.duration,
-      shops: service.shops
+      shops: Array.isArray(service.shops) 
         ? service.shops.map((shop) => ({
             id: shop.id,
             name: shop.name,
@@ -15,11 +15,12 @@ module.exports = class GetServicesResource {
             city: shop.city,
             activity_domain: shop.activity_domain,
           }))
-        : [],
+        : [], // Si pas de magasins, retourne un tableau vide
       created_at: service.created_at,
       updated_at: service.updated_at,
     };
   }
+
   static collection(services) {
     return services.map((service) => this.toResource(service));
   }

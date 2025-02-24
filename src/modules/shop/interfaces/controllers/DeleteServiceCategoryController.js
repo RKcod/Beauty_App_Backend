@@ -1,4 +1,4 @@
-const DeleteServiceCategoryUseCase = require("../../../shop/core/usecases/DeleteServiceCategoryUseCae");
+const DeleteServiceCategoryUseCase = require("../../core/usecases/DeleteServiceCategoryUseCase");
 module.exports = class DeleteServiceCategoryController {
   static async delete(req, res) {
     const { id } = req.params;

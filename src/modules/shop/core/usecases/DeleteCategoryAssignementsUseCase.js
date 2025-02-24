@@ -2,8 +2,8 @@ const CategoryAssignementRepository = require("../../infrastructure/repositories
 
 module.exports = class DeleteCategoryAssignementUseCase {
   // 🔹 Créer une catégorie
-  static async deleteCategoryAssignement(dadaId) {
-    if (!dadaId) {
+  static async deleteCategoryAssignement(id) {
+    if (!id) {
         throw new Error("This service category id does not exist");
       }
       return await CategoryAssignementRepository.deleteById(categoryId);

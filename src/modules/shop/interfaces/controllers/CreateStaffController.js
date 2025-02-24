@@ -1,4 +1,5 @@
 const CreateStaffUseCase = require("../../core/usecases/CreateStaffUseCase");
+const GetStaffsResource = require("../resources/GetStaffResource");
 
 module.exports = class CreateStaffController { 
   static async create(req, res) {
@@ -6,9 +7,10 @@ module.exports = class CreateStaffController {
 
     try {
       const staff = await CreateStaffUseCase.createStaff(staffData);
+      const staffFormatted = GetStaffsResource.toResource(staff);
       return res
         .status(201)
-        .json({ message: "Staff created successfully", data: staff });
+        .json({ message: "Staff created successfully", data: staffFormatted });
     } catch (error) {
       return res.status(400).json({ message: error.message });
     }

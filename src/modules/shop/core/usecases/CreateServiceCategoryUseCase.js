@@ -2,7 +2,8 @@ const ServiceCategoryRepository = require("../../infrastructure/repositories/Ser
 
 module.exports = class ServiceCategoryUseCase {
   // 🔹 Créer une catégorie
-  static async createCategory(dada) {
-    return await ServiceCategoryRepository.create(dada);
+  static async createCategory(serviceCategoryDada) {
+    
+    return await ServiceCategoryRepository.create(serviceCategoryDada);
   }
 };

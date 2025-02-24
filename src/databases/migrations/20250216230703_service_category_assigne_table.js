@@ -18,12 +18,12 @@ exports.up = function (knex) {
       .inTable("service_categories")
       .onDelete("CASCADE")
       .onUpdate("CASCADE");
-    table.timestamp("created_at");
-    table.timestamp("update_at");
+      table.timestamps(true, true);
+
   });
 };
 
 
 exports.down = function (knex) {
-  return knex.schema.dropViewIfExists("service_category_assignements");
+   return knex.schema.dropTableIfExists("service_category_assignements");
 };

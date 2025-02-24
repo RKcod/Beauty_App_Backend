@@ -22,8 +22,7 @@ exports.up = function (knex) {
       enumName: "role_enum",
     });
 
-    table.timestamp("created_at");
-    table.timestamp("update_at");
+    table.timestamps(true, true);
   });
 };
 
