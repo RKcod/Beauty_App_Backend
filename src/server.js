@@ -1,11 +1,14 @@
 // server.js
 const express = require("express");
 const app = express();
+const http = require("http");
+const server = http.createServer(app);
 const cors = require("cors");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
 const path = require("path");
+const WebSocketService = require("./shared/WebSocketService");
 const PORT = 3100;
 const userRoutes = require("../src/modules/user/interfaces/routes/userRoutes");
 const roleRoutes = require("../src/modules/user/interfaces/routes/roleRoutes");
@@ -25,6 +28,9 @@ app.use(morgan("dev"));
 
 // Pour gérer les requêtes JSON
 app.use(express.json());
+
+// Démarrer WebSocket
+WebSocketService.initialize(server);
 
 app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
