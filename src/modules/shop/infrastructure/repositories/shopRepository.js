@@ -6,10 +6,11 @@ class ShopRepository {
   /**
    * Créer une boutique
    */
-  static async create(shopData) {
-    return db(ShopModel.getTableName()).insert(shopData).returning("*");
+  static async create(serviceData) {
+    // Insérer le service et récupérer son ID
+    const service = await ShopModel.query().insert(serviceData).returning("*");
+    return ShopModel.query().findById(service.id).withGraphFetched("users");
   }
-
   /**
    * Récupérer toutes les boutiques avec pagination
    */
@@ -24,8 +25,13 @@ class ShopRepository {
   /**
    * Trouver une boutique par son ID
    */
-  static async findById(shopId) {
-    return db(ShopModel.getTableName()).where({ id: shopId }).first();
+  // static async findById(shopId) {
+  //   return db(ShopModel.getTableName()).where({ id: shopId }).first();
+  // }
+  static async findById(dataId) {
+    return await ShopModel.query()
+      .findById(dataId) // Utiliser `findById` au lieu de `where({ id: dataId })`
+      .withGraphFetched("users"); // Charger les relations
   }
 
   /**
@@ -77,7 +83,6 @@ class ShopRepository {
       .where({ shop_id: shopId, user_type: "staff" })
       .select("*");
   }
-
 }
 
 module.exports = ShopRepository;

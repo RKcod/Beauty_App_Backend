@@ -8,7 +8,7 @@ class ShopModel extends BaseModel {
   static get relationMappings() {
     const UserModel = require("../../../user/infrastructure/models/UserModel");
     return {
-      users: this.hasMany(UserModel, "shops.user_id", "users.id"),
+      users: this.hasMany(UserModel, "shops.owner_id", "users.id"),
     //  staffs: this.hasMany(StaffModel, "staffs.shop_id", "shops.id"),
     };
   }

@@ -52,15 +52,7 @@ class StaffRepository {
   static async findByOwnerId(userId) {
     return db(StaffModel.getTableName()).where({ user_id: userId }).first();
   }
-  /**
-   * Mettre à jour un staff par son ID
-   */
-  // static async updateById(staffId, staffData) {
-  //   return db(StaffModel.getTableName())
-  //     .where({ id: staffId })
-  //     .update(staffData)
-  //     .returning("*");
-  // }
+
   /**
    * Supprimer un staff par son ID
    */
