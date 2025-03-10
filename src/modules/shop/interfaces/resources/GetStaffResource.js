@@ -5,7 +5,10 @@ module.exports = class GetStaffsResource {
       id: staff.id,
       role: staff.role,
       created_at: staff.created_at,
-      updated_at: staff.updated_at,
+      updated_at: staff.update_at,
+      user_id: staff.user_id,
+      shop_id: staff.shop_id,
+
       users: Array.isArray(staff.users)
         ? staff.users.map((user) => ({
             id: user.id,

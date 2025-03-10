@@ -1,4 +1,4 @@
-class ServiceCategory {
+module.exports = class ServiceCategory {
   constructor({ name, description, created_at, updated_at }) {
     this.name = name;
     this.description = description;
@@ -13,4 +13,4 @@ class ServiceCategory {
       throw new Error('Le champ "description" est obligatoire.');
     }
   }
-}
+};

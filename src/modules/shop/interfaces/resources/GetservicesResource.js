@@ -6,6 +6,7 @@ module.exports = class GetServicesResource {
       description: service.description,
       price: service.price,
       duration: service.duration,
+      shop:  service.shop_id,
       shops: Array.isArray(service.shops) 
         ? service.shops.map((shop) => ({
             id: shop.id,
@@ -17,7 +18,7 @@ module.exports = class GetServicesResource {
           }))
         : [], // Si pas de magasins, retourne un tableau vide
       created_at: service.created_at,
-      updated_at: service.updated_at,
+      updated_at: service.update_at,
     };
   }
 

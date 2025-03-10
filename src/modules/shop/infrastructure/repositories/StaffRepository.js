@@ -55,17 +55,23 @@ class StaffRepository {
   /**
    * Mettre à jour un staff par son ID
    */
-  static async updateById(staffId, staffData) {
-    return db(StaffModel.getTableName())
-      .where({ id: staffId })
-      .update(staffData)
-      .returning("*");
-  }
+  // static async updateById(staffId, staffData) {
+  //   return db(StaffModel.getTableName())
+  //     .where({ id: staffId })
+  //     .update(staffData)
+  //     .returning("*");
+  // }
   /**
    * Supprimer un staff par son ID
    */
   static async deleteById(staffId) {
     return db(StaffModel.getTableName()).where({ id: staffId }).del();
+  }
+  static async updateById(dataId, data) {
+    return db(StaffModel.getTableName())
+      .where({ id: dataId })
+      .update(data)
+      .returning("*");
   }
 }
 module.exports = StaffRepository;

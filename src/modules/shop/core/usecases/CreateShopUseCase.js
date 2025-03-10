@@ -23,7 +23,6 @@ module.exports = class CreateShopUseCase {
       phone: phone,
     });
 
-
     if (userCreated) {
       await Helpers.sendMail(
         userCreated[0],

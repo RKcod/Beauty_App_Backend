@@ -11,8 +11,6 @@ class ServiceRepository {
     const service = await ServiceModel.query()
       .insert(serviceData)
       .returning("*");
-
-    // Charger le service avec ses relations (shops)
     return ServiceModel.query()
       .findById(service.id)
       .withGraphFetched("[shops]");
@@ -34,13 +32,24 @@ class ServiceRepository {
   static async findById(serviceId) {
     return ServiceModel.query().findById(serviceId).withGraphFetched("shops"); // "shop" doit correspondre à la relation définie dans ServiceModel
   }
+  static async findByName(name) {
+    return db(ServiceModel.getTableName())
+      .where({ name: name })
+      .first();
+  }
   static async findByOwnerId(serviceId) {
     return db(ServiceModel.getTableName())
       .where({ shop_id: serviceId })
       .first();
   }
   static async deleteById(serviceId) {
-    return db(ShopModel.getTableName()).where({ id: serviceId }).del();
+    return db(ServiceModel.getTableName()).where({ id: serviceId }).del();
+  }
+  static async updateById(dataId, data) {
+    return db(ServiceModel.getTableName())
+      .where({ id: dataId })
+      .update(data)
+      .returning("*");
   }
 }
 module.exports = ServiceRepository;

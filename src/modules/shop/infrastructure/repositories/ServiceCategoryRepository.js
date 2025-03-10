@@ -4,6 +4,7 @@ const ServiceCategoryModel = require("../../../shop/infrastructure/models/Servic
 
 class ServiceCategoryRepository {
   static async create(data) {
+    
     return db(ServiceCategoryModel.getTableName()).insert(data).returning("*");
   }
   static async getAll(serviceCategoryPaginateFilter, page, perPage) {
@@ -20,6 +21,17 @@ class ServiceCategoryRepository {
   }
   static async deleteById(dataId) {
     return db(ServiceCategoryModel.getTableName()).where({ id: dataId }).del();
+  }
+  static async findByName(name) {
+    return db(ServiceCategoryModel.getTableName())
+      .where({ name: name })
+      .first();
+  }
+  static async updateById(dataId, data) {
+    return db(ServiceCategoryModel.getTableName())
+      .where({ id: dataId })
+      .update(data)
+      .returning("*");
   }
 }
 module.exports = ServiceCategoryRepository;

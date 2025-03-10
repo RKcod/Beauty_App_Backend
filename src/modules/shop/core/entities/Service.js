@@ -1,4 +1,4 @@
-class Service {
+module.exports = class Service {
   constructor({
     shop_id,
     name,
@@ -6,7 +6,7 @@ class Service {
     price,
     duration,
     created_at,
-    updated_at,
+    update_at,
   }) {
     this.shop_id = shop_id;
     this.name = name;
@@ -14,12 +14,11 @@ class Service {
     this.price = price;
     this.duration = duration;
     this.created_at = created_at || new Date();
-    this.updated_at = updated_at || new Date();
+    this.update_at = update_at || new Date();
   }
   validate() {
-    
     if (!this.shop_id) {
       throw new Error('Le champ " shop_id" est obligatoire.');
     }
   }
-}
+};

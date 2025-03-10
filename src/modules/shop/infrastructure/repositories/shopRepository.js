@@ -77,6 +77,7 @@ class ShopRepository {
       .where({ shop_id: shopId, user_type: "staff" })
       .select("*");
   }
+
 }
 
 module.exports = ShopRepository;
