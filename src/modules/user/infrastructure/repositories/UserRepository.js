@@ -15,7 +15,7 @@ class UserRepository {
     let query = UserModel.query()
       .select("users.*")
       .withGraphFetched("shop")
-      .orderBy("users.id", "asc").debug();
+      .orderBy("users.id", "asc");
     query = userPaginateFilter.applyFilters(query);
 
     return paginationProvider.paginate(query, page, perPage);

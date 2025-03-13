@@ -2,13 +2,13 @@ const ServiceCategoryRepository = require("../../../infrastructure/repositories/
 const ServiceCategory = require("../../entities/ServiceCategories");
 
 module.exports = class ServiceCategoryUseCase {
-  // 🔹 Créer une catégorie
+
   static async createCategory(serviceCategoryData) {
     const category = await ServiceCategoryRepository.findByName(
       serviceCategoryData.name
     );
     if (category) {
-      throw new Error("this category service already exist");
+      throw new Error("This service category already exist");
     }
     const serviceCategoryFormated = new ServiceCategory(serviceCategoryData);
 

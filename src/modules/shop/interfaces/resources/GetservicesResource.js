@@ -16,7 +16,7 @@ module.exports = class GetServicesResource {
             city: shop.city,
             activity_domain: shop.activity_domain,
           }))
-        : [], // Si pas de magasins, retourne un tableau vide
+        : [], 
       created_at: service.created_at,
       updated_at: service.update_at,
     };

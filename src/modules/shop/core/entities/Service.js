@@ -6,7 +6,7 @@ module.exports = class Service {
     price,
     duration,
     created_at,
-    update_at,
+    updated_at,
   }) {
     this.shop_id = shop_id;
     this.name = name;
@@ -14,7 +14,7 @@ module.exports = class Service {
     this.price = price;
     this.duration = duration;
     this.created_at = created_at || new Date();
-    this.update_at = update_at || new Date();
+    this.updated_at = updated_at || new Date();
   }
   validate() {
     if (!this.shop_id) {
