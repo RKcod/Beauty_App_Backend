@@ -1,3 +1,4 @@
 node_modules/
-.env
+.env*
+src/modules/uploads/*
 npm-debug.log
