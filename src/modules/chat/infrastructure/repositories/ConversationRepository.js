@@ -21,12 +21,18 @@ class ConversationRepository {
     return conversation;
   }
 
+
+  static async create(conversationEntity) {
+    return await ConversationModel.query().insertAndFetch(conversationEntity);
+  }
+  
+
  
   static async getUserConversations(userId) {
     return ConversationModel.query()
       .where("user1_id", userId)
       .orWhere("user2_id", userId)
-      .withGraphFetched("[shop, lastMessage]")
+      .withGraphFetched("[shop, lastMessage, user1, user2]")
       .orderBy("updated_at", "desc");
   }
 

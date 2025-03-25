@@ -20,6 +20,13 @@ module.exports = class GetShopsResource {
         };
     }
 
+    static minimal(shop) {
+        return {
+            id: shop.id,
+            name: shop.name,
+        };
+    }
+
     static collection(shops) {
         return shops.map((shop) => this.toResource(shop));
     }

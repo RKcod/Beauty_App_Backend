@@ -22,6 +22,14 @@ module.exports = class GetAllUsersResource {
                 updated_at: user.shop.updated_at,
             } : null, 
         };
+
+    }
+
+    static minimal(user){
+        return {
+            id:user.id,
+            username:user.username
+        }
     }
 
     static collection(users) {

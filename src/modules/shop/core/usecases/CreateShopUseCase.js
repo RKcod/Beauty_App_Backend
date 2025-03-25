@@ -1,8 +1,8 @@
 const Helpers = require("../../../../shared/Helpers");
 const UserRepository = require("../../../user/infrastructure/repositories/UserRepository");
 const PasswordService = require("../../../user/infrastructure/services/PasswordService");
-const ShopRepository = require("../../infrastructure/repositories/ShopRepository");
-const Shop = require("../entities/Shop");
+const ShopRepository = require("../../infrastructure/repositories/shopRepository");
+const Shop = require("../entities/shop");
 
 module.exports = class CreateShopUseCase {
   static async createShop(shopData) {

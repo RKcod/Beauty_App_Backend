@@ -1,4 +1,4 @@
-const ShopRepository = require("../../infrastructure/repositories/ShopRepository");
+const ShopRepository = require("../../infrastructure/repositories/shopRepository");
 
 module.exports = class DeleteShopUseCase {
   static async deleteShop(id) {

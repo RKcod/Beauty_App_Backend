@@ -14,6 +14,7 @@ const userRoutes = require("../src/modules/user/interfaces/routes/userRoutes");
 const roleRoutes = require("../src/modules/user/interfaces/routes/roleRoutes");
 const permissionRoutes = require("../src/modules/user/interfaces/routes/permissionRoutes");
 const shopRoutes = require("../src/modules/shop/interfaces/routes/shopRoutes");
+const chatRoutes = require("../src/modules/chat/interfaces/routes/chatRoutes");
 dotenv.config(); // Charger les variables d'environnement
 
 // === MIDDLEWARES ===
@@ -34,7 +35,7 @@ WebSocketService.initialize(server);
 
 app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
-app.use("/api/v1", [userRoutes, roleRoutes, permissionRoutes, shopRoutes]);
+app.use("/api/v1", [userRoutes, roleRoutes, permissionRoutes, shopRoutes, chatRoutes]);
 // define the route
 app.get("/", (req, res) => {
   res.send(

@@ -32,6 +32,14 @@ class WebSocketService {
       this.io.to(`user_${userId}`).emit(event, data);
     }
   }
+
+  // ✅ Nouvelle méthode pour émettre dans une conversation
+  emitToConversation(conversationId, event, data) {
+    if (this.io) {
+      console.log(`📢 Emitting event "${event}" to conversation_${conversationId}`, data);
+      this.io.to(`conversation_${conversationId}`).emit(event, data);
+    }
+  }
 }
 
 module.exports = new WebSocketService();
