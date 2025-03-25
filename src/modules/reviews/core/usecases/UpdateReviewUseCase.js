@@ -9,7 +9,7 @@ module.exports = class UpdateReviewUseCase {
       throw new Error("This review id does not exist");
     }
     // const staffFormated = new StaffEntitie(data);
-    const updateReviewdata = await reviewRepository.updateById(id, data);
+    const updateReviewdata = await reviewRepository.update(id, data);
     return updateReviewdata;
   }
 };

@@ -14,8 +14,9 @@ module.exports = class CreateReviewUseCase {
       throw new Error("this user id does exist");
     }
     // const staffFormated = new StaffEntitie(staffData);
-
-    return await reviewRepository.create(reviewData);
+     const a =  await reviewRepository.create(reviewData);
+     console.log(a);
+    return a;
     }
 
 }

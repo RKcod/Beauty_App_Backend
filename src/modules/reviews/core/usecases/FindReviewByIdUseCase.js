@@ -6,6 +6,6 @@ module.exports = class FindReviewByIdUseCase {
     if (!review) {
       throw new Error("This review does not exist");
     }
-    return staff;
+    return review;
   }
 };

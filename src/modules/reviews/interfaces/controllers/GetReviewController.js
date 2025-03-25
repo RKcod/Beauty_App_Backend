@@ -11,7 +11,9 @@ module.exports = class GetReviewController {
           req.query.page || 1,
           15
         );
+      
         const reviewsFormatted = getReviewsResource.collection(review.data);
+       
   
         return res.status(200).json({
           message: "successfully",

@@ -2,10 +2,12 @@ const reviewRepository = require("../../infrastructure/repositories/ReviewsRepos
 
 module.exports = class GetReviewUseCase {
   static async getReviews(reviewPaginateFilter, page = 1, perPage = 15) {
-    return await reviewRepository.getAll(
+  return  await reviewRepository.getAll(
       reviewPaginateFilter,
       (page = 1),
       (perPage = 15)
     );
+    
+
   }
 };
