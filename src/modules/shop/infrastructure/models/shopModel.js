@@ -9,7 +9,7 @@ class ShopModel extends BaseModel {
     const UserModel = require("../../../user/infrastructure/models/UserModel");
     return {
       users: this.hasMany(UserModel, "shops.owner_id", "users.id"),
-    //  staffs: this.hasMany(StaffModel, "staffs.shop_id", "shops.id"),
+      //  staffs: this.hasMany(StaffModel, "staffs.shop_id", "shops.id"),
     };
   }
 }
