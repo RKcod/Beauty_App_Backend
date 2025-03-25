@@ -22,8 +22,8 @@ class ServiceCategoryAssignementRepository {
 
   static async findById(dataId) {
     return await ServiceCategoryAssignementsModel.query()
-      .findById(dataId) // Utiliser `findById` au lieu de `where({ id: dataId })`
-      .withGraphFetched("[service, category]"); // Charger les relations
+    .where("id", dataId) // Utiliser `findById` au lieu de `where({ id: dataId })`
+      .withGraphFetched("[service, category]").first(); // Charger les relations
   }
 
   static async deleteById(dataId) {
@@ -31,11 +31,21 @@ class ServiceCategoryAssignementRepository {
       .where({ id: dataId })
       .del();
   }
-  static async updateById(dataId, data) {
-    return db(ServiceCategoryAssignementsModel.getTableName())
-      .where({ id: dataId })
-      .update(data)
-      .returning("*");
-  }
+  // static async updateById(dataId, data) {
+  // const updatedRecord = await ServiceCategoryAssignementsModel.query()
+  //   .patchAndFetchById(dataId, data) // Met à jour et retourne l'enregistrement mis à jour
+  //   .withGraphFetched("[service, category]"); 
+
+  // return updatedRecord;
+  // }
+//}
+static async updateById(dataId, data) {
+  db(ServiceCategoryAssignementsModel.getTableName())
+    .where({ id: dataId })
+    .update(data);
+    const updatedRecord = await findById(dataId);
+    return updatedRecord
+}
+
 }
 module.exports = ServiceCategoryAssignementRepository;

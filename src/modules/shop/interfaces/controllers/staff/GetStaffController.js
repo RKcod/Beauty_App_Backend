@@ -1,17 +1,17 @@
-const GetStaffUseCase = require("../../../core/usecases/staffs/GetStaffUseCase");
+const getStaffUseCase = require("../../../core/usecases/staffs/GetStaffUseCase");
 const StaffPaginateFilter = require("../../../application/filters/ShopPaginateFilter");
-const GetStaffsResource = require("../../resources/GetStaffResource");
+const getStaffsResource = require("../../resources/GetStaffResource");
 
-module.exports = class DeleteStaffController {
+module.exports = class GetStaffController {
   static async getAll(req, res) {
     try {
       const staffPaginateFilter = new StaffPaginateFilter(req.query);
-      const staffs = await GetStaffUseCase.getStaffs(
+      const staffs = await getStaffUseCase.getStaffs(
         staffPaginateFilter,
         req.query.page || 1,
         15
       );
-      const staffsFormatted = GetStaffsResource.collection(staffs.data);
+      const staffsFormatted = getStaffsResource.collection(staffs.data);
 
       return res.status(200).json({
         message: "successfully",

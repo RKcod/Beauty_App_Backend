@@ -1,6 +1,6 @@
 const StaffRepository = require("../../../infrastructure/repositories/StaffRepository");
 
-module.exports = class GetStaffByIdCase {
+module.exports = class FindStaffByIdUseCase {
   static async findStaff(id) {
     const staff = await StaffRepository.findById(id);
     if (!staff) {

@@ -1,11 +1,11 @@
 const getServicesResource = require("../../resources/GetservicesResource");
-const CreateServiceUseCase = require("../../../core/usecases/services/CreateServiceUseCase");
+const createServiceUseCase = require("../../../core/usecases/services/CreateServiceUseCase");
 module.exports = class CreateServiceController {
   static async create(req, res) {
     const serviceData = req.body;
 
     try {
-      const service = await CreateServiceUseCase.createService(serviceData);
+      const service = await createServiceUseCase.createService(serviceData);
       const servicesFormatted = getServicesResource.toResource(service);
       return res
         .status(201)

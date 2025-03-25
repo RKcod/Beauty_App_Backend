@@ -1,7 +1,7 @@
 const ServiceCategoryRepository = require("../../../infrastructure/repositories/ServiceCategoryRepository");
 
 module.exports = class DeleteServiceCategoryUseCase {
-  static async getServiceCategoryById(id) {
+  static async deleteServiceCategory(id) {
     const categoryId = await ServiceCategoryRepository.findById(id);
 
     if (!categoryId) {

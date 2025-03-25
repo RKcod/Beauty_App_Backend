@@ -1,6 +1,6 @@
 const ServiceRepository = require("../../../infrastructure/repositories/ServiceRepository");
 
-module.exports = class GetServiceByUseCase {
+module.exports = class FindServiceByUseCase {
   static async findService(id) {
     const service = await ServiceRepository.findById(id);
     if (!service) {

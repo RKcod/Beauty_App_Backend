@@ -1,6 +1,6 @@
 const ShopRepository = require("../../infrastructure/repositories/ShopRepository");
 
-module.exports = class GetShopByIdCase {
+module.exports = class FindShopByIdUseCase {
   static async findShop(id) {
     const shop = await ShopRepository.findById(id);
     if (!shop) {

@@ -1,16 +1,16 @@
-const CreateServiceCategoryUseCase = require("../../../core/usecases/serviceCategory/CreateServiceCategoryUseCase");
-const GetServiceCategoryResource = require("../../resources/GetServiceCategoryResource");
+const createServiceCategoryUseCase = require("../../../core/usecases/serviceCategory/CreateServiceCategoryUseCase");
+const getServiceCategoryResource = require("../../resources/GetServiceCategoryResource");
 
 module.exports = class CreateServiceCategoryController {
   static async create(req, res) {
     const serviceData = req.body;
 
     try {
-      const serviceCategory = await CreateServiceCategoryUseCase.createCategory(
+      const serviceCategory = await createServiceCategoryUseCase.createCategory(
         serviceData
       );
 
-      const serviceCategoryFormatted = GetServiceCategoryResource.toResource(
+      const serviceCategoryFormatted = getServiceCategoryResource.toResource(
         serviceCategory[0]
       );
 

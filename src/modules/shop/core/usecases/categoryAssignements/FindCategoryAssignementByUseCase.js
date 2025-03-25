@@ -1,8 +1,8 @@
 const CategoryAssignementRepository = require("../../../infrastructure/repositories/ServiceCategoryAssignementsRepository");
 
-module.exports = class FindCategoryAssignementUseCase {
+module.exports = class FindCategoryAssignementByUseCase {
   // 🔹 Créer une catégorie
-  static async createCategoryAssignement(id) {
+  static async findCategoryAssignement(id) {
     if (!id) {
       throw new Error("This service category id does not exist");
     }

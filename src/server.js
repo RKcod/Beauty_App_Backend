@@ -15,6 +15,8 @@ const categoryAssignementRoutes = require("../src/modules/shop/interfaces/routes
 const serviceCategoryRoutes = require("../src/modules/shop/interfaces/routes/serviceCategoryRoutes");
 const serviceRoutes = require("../src/modules/shop/interfaces/routes/serviceRoutes");
 const staffRoutes = require("../src/modules/shop/interfaces/routes/staffRoutes");
+const reviewRoutes = require("../src/modules/reviews/interfaces/routes/reviewRoutes");
+
 
 dotenv.config(); // Charger les variables d'environnement
 
@@ -42,6 +44,7 @@ app.use("/api/v1", [
   serviceCategoryRoutes,
   serviceRoutes,
   staffRoutes,
+  reviewRoutes
 ]);
 // define the route
 app.get("/", (req, res) => {

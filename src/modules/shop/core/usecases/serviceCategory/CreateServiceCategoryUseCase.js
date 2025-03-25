@@ -1,5 +1,5 @@
 const ServiceCategoryRepository = require("../../../infrastructure/repositories/ServiceCategoryRepository");
-const ServiceCategory = require("../../entities/ServiceCategories");
+const ServiceCategory = require("../../entities/ServiceCategory");
 
 module.exports = class ServiceCategoryUseCase {
   // 🔹 Créer une catégorie

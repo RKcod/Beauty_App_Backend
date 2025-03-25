@@ -13,26 +13,26 @@ module.exports = class GetServiceCategoryResource {
             duration: service.duration,
           }))
         : data.service // ✅ Si ce n'est pas un tableau, renvoie un objet
-          ? {
-              id: data.service.id,
-              name: data.service.name,
-              description: data.service.description,
-              price: data.service.price,
-              duration: data.service.duration,
-            }
-          : [], // ✅ Retourne un tableau vide si `data.service` est null ou undefined
+        ? {
+            id: data.service.id,
+            name: data.service.name,
+            description: data.service.description,
+            price: data.service.price,
+            duration: data.service.duration,
+          }
+        : [], // ✅ Retourne un tableau vide si `data.service` est null ou undefined
 
-        category: Array.isArray(data.category) // ✅ Vérifie si `data.category` est un tableau
+      category: Array.isArray(data.category) // ✅ Vérifie si `data.category` est un tableau
         ? data.category.map((category) => ({
             id: category.id,
             name: category.name,
           }))
         : data.category // ✅ Si ce n'est pas un tableau, renvoie un objet
-          ? {
-              id: data.category.id,
-              name: data.category.name,
-            }
-          : [], // ✅ Retourne un t
+        ? {
+            id: data.category.id,
+            name: data.category.name,
+          }
+        : [], // ✅ Retourne un t
     };
   }
   static collection(datas) {
@@ -41,5 +41,4 @@ module.exports = class GetServiceCategoryResource {
     }
     return datas.map((data) => this.toResource(data));
   }
-
 };

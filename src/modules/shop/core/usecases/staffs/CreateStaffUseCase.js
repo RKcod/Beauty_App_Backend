@@ -1,4 +1,4 @@
-const StaffRepository = require("../../../infrastructure/repositories/StaffRepository");
+const staffRepository = require("../../../infrastructure/repositories/StaffRepository");
 const shopRepository = require("../../../infrastructure/repositories/ShopRepository");
 const userRepository = require("../../../../user/infrastructure/repositories/UserRepository");
 const StaffEntitie = require("../../entities/Staff");
@@ -17,6 +17,6 @@ module.exports = class CreateStaffUseCase {
     }
     const staffFormated = new StaffEntitie(staffData);
 
-    return await StaffRepository.create(staffFormated);
+    return await staffRepository.create(staffFormated);
   }
 };

@@ -1,10 +1,10 @@
-const DeleteServiceCategoryUseCase = require("../../../core/usecases/serviceCategory/DeleteServiceCategoryUseCase");
+const deleteServiceCategoryUseCase = require("../../../core/usecases/serviceCategory/DeleteServiceCategoryUseCase");
 module.exports = class DeleteServiceCategoryController {
   static async delete(req, res) {
     const { id } = req.params;
 
     try {
-      await DeleteServiceCategoryUseCase.getServiceCategoryById(id);
+      await deleteServiceCategoryUseCase.deleteServiceCategory(id);
 
       return res
         .status(200)

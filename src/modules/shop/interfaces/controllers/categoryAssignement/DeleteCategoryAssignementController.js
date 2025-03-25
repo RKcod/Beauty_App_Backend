@@ -1,10 +1,10 @@
-const DeleteCategoryAssignementUseCase = require("../../../core/usecases/categoryAssignements/DeleteCategoryAssignementsUseCase");
-module.exports = class DeleteCategoryAssignementController {
+const deleteCategoryAssignementUseCase = require("../../../core/usecases/categoryAssignements/DeleteCategoryAssignementUseCase");
+module.exports = class FindCategoryAssignementByIdController {
   static async delete(req, res) {
     const { id } = req.params;
 
     try {
-    await DeleteCategoryAssignementUseCase.deleteCategoryAssignement(id);
+    await deleteCategoryAssignementUseCase.deleteCategoryAssignement(id);
 
       return res
         .status(200)

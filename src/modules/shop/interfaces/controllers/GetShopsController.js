@@ -1,5 +1,5 @@
 
-const getShopsUseCase = require("../../core/usecases/GetShopUseCase");
+const getShopUseCase = require("../../core/usecases/GetShopUseCase");
 const getShopsResource = require("../resources/GetShopsResourse");
 const ShopPaginateFilter = require("../../application/filters/ShopPaginateFilter");
 
@@ -7,7 +7,7 @@ class GetShopsController {
   static async getAll(req, res) {
     try {
       const shopPaginateFilter = new ShopPaginateFilter(req.query);
-      const shops = await getShopsUseCase.getShops(
+      const shops = await getShopUseCase.getShops(
         shopPaginateFilter,
         req.query.page || 1,
         15

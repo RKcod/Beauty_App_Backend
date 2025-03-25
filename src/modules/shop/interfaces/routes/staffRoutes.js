@@ -7,7 +7,7 @@ const authMiddleware = require("../../../user/interfaces/middlewares/authMiddlew
 
 const createStaffController = require("../controllers/staff/CreateStaffController");
 const getStaffController = require("../controllers/staff/GetStaffController");
-const findStaffController = require("../controllers/staff/GetStaffByIdController");
+const findStaffController = require("../controllers/staff/FindStaffByIdController");
 const deleteStaffController = require("../controllers/staff/DeleteStaffController");
 const updateStaffController = require("../controllers/staff/UpdateStaffController");
 

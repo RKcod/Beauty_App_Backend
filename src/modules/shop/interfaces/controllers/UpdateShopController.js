@@ -1,6 +1,6 @@
 const UpdateShopUseCase = require("../../core/usecases/UpdateShopsUseCase");
 const GetShopsResource = require("../resources/GetShopsResourse");
-module.exports = class UpdateRoleController {
+module.exports = class UpdateShopController {
   static async update(req, res) {
     try {
       const { id } = req.params;
@@ -10,7 +10,7 @@ module.exports = class UpdateRoleController {
       const Shop = updatedShop[0];
 
       return res.status(201).json({
-        message: " Service updated successfully.",
+        message: " Service updated successfully",
         data: GetShopsResource.toResource(Shop),
       });
     } catch (error) {

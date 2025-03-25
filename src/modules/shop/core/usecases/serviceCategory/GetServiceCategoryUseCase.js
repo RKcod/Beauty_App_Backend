@@ -1,6 +1,6 @@
 const ServiceCategoryRepository = require("../../../infrastructure/repositories/ServiceCategoryRepository");
 
-module.exports = class GetServiceCategoryUseCse {
+module.exports = class GetServiceCategoryUseCase {
   static async getServiceCategory(
     servicePaginateFilter,
     page = 1,
