@@ -5,7 +5,6 @@ const paginationProvider = require("../../../../providers/PaginationProvider");
 
 class MessageRepository {
   static async createMessage(messageData) {
-    console.log('my data', messageData)
     const messageEntity = new Message(messageData);
     const message = await MessageModel.query().insertAndFetch(messageEntity);
 
@@ -21,8 +20,8 @@ class MessageRepository {
   }
 
   static async getMessagesByConversation(conversationPaginateFilter, page, perPage) {
-    let query = MessageModel.query()
-      .withGraphFetched("sender")
+    let query = ConversationModel.query()
+      .withGraphFetched("messages.sender")
       .orderBy("created_at", "desc");
 
     query = conversationPaginateFilter.applyFilters(query);
