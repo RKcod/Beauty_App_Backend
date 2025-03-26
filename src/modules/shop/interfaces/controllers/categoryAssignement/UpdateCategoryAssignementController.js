@@ -11,11 +11,11 @@ module.exports = class UpdateCategoryAssignementController {
           req.body
         );
 
-      const CategoryAssignement = updatedCategoryAssignement[0];
+      const CategoryAssignement = updatedCategoryAssignement;
 
       return res.status(201).json({
         message: " Category Assignement updated successfully.",
-        data: getCategoryAssignementResource.toResource(CategoryAssignement),
+        data: CategoryAssignement,
       });
     } catch (error) {
       return res.status(400).json({ error: error.message });

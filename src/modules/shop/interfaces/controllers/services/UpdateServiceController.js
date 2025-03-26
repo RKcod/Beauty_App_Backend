@@ -7,12 +7,12 @@ module.exports = class UpdateServiceController {
 
       const updatedService = await UpdateServiceUseCase.updateService(id, req.body);
 
-      const service = updatedService[0];
+      const service = updatedService;
       console.log(service);
 
       return res.status(201).json({
         message: " Service updated successfully.",
-        data: getServicesResource.toResource(service),
+        data: service,
       });
     } catch (error) {
       return res.status(400).json({ error: error.message });

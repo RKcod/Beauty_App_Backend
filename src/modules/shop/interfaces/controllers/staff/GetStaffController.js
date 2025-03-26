@@ -11,8 +11,9 @@ module.exports = class GetStaffController {
         req.query.page || 1,
         15
       );
+      // console.log('oo',staffs);
       const staffsFormatted = getStaffsResource.collection(staffs.data);
-
+      // console.log('ko', staffsFormatted);
       return res.status(200).json({
         message: "successfully",
         data: staffsFormatted,

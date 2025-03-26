@@ -10,7 +10,7 @@ module.exports = class UpdateStaffUseCase {
     }
     const staffFormated = new StaffEntitie(data);
 
-    const updateStaffdata = await StaffRepository.updateById(id, staffFormated);
+    const updateStaffdata = await StaffRepository.update(id, staffFormated);
     return updateStaffdata;
   }
 };

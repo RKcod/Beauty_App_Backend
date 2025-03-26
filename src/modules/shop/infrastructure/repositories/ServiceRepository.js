@@ -45,11 +45,36 @@ class ServiceRepository {
   static async deleteById(serviceId) {
     return db(ServiceModel.getTableName()).where({ id: serviceId }).del();
   }
-  static async updateById(dataId, data) {
-    return db(ServiceModel.getTableName())
-      .where({ id: dataId })
-      .update(data)
-      .returning("*");
+  // static async updateById(dataId, data) {
+  //   return db(ServiceModel.getTableName())
+  //     .where({ id: dataId })
+  //     .update(data)
+  //     .returning("*");
+  // }
+  static async update(dataId, data) {
+    try {
+      // Mettre à jour la revue dans la base de données
+      await ServiceModel
+        .query()
+        .patchAndFetchById(dataId, data) // Mettre à jour et récupérer la revue modifiée
+        .withGraphFetched("[shops]"); // Charger les relations users et shops
+
+      // Récupérer la revue mise à jour avec les relations
+      const updatedService = await ServiceModel
+        .query()
+        .findById(dataId)
+        .withGraphFetched("[shops]"); // Charger les relations users et shops
+      
+      // Retourner la revue mise à jour avec ses relations
+      return {
+        message: "service updated successfully.",
+        data: updatedService,
+      };
+    } catch (error) {
+      console.error("Error updating service:", error.message);
+      console.error("Stack trace:", error.stack);
+      throw new Error("An error occurred while updating the service");
+    }
   }
 }
 module.exports = ServiceRepository;

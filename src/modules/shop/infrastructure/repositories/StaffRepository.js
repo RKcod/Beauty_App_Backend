@@ -5,14 +5,6 @@ class StaffRepository {
   /**
    * Créer un staff
    */
-
-  // static async create(staffData) {
-  //   return db(StaffModel.getTableName())
-  //     .insert(staffData)
-  //     .returning("*")
-  //     .debug();
-  // }
-
   static async create(staffData) {
     try {
       // Insérer le staff dans la base de données
@@ -20,8 +12,15 @@ class StaffRepository {
         .insert(staffData)
         .returning("*");
 
+      // Récupérer la revue avec les relations (users et shops)
+      const staffWithRelations = await StaffModel
+        .query()
+        .findById(staff.id)
+        .withGraphFetched("[user, shop]"); // Charger les relations users et shops
+
+
       // Récupérer le staff sans les relations (juste pour tester)
-      return staff;
+      return staffWithRelations;
     } catch (error) {
       console.error("Error creating staff:", error.message);
       console.error("Stack trace:", error.stack);
@@ -33,24 +32,38 @@ class StaffRepository {
    * Récupérer tout un staff avec pagination
    */
   static async getAll(staffPaginateFilter, page, perPage) {
-    let query = StaffModel.query().select("*").withGraphFetched("[users]");
+    let query = StaffModel.query()
+      .select("*")
+      .withGraphFetched("[user, shop]");
 
     query = staffPaginateFilter.applyFilters(query);
-
+    
     return paginationProvider.paginate(query, page, perPage);
   }
+ 
   /**
    * Trouver une staff par son ID
    */
   static async findById(staffId) {
-    return db(StaffModel.getTableName()).where({ id: staffId }).first();
+   // return db(StaffModel.getTableName()).where({ id: staffId }).first();
+    const review = await StaffModel
+    .query()
+    .findById(staffId)
+    .withGraphFetched("[user, shop]");
+    return review;
+
   }
 
   /**
    * Trouver un staff par son propriétaire (User)
    */
   static async findByOwnerId(userId) {
-    return db(StaffModel.getTableName()).where({ user_id: userId }).first();
+   // return db(StaffModel.getTableName()).where({ user_id: userId }).first();
+    const staff = await StaffModel
+      .query()
+      .findById(userId)
+      .withGraphFetched("[user, shop]");
+    return staff;
   }
 
   /**
@@ -59,11 +72,31 @@ class StaffRepository {
   static async deleteById(staffId) {
     return db(StaffModel.getTableName()).where({ id: staffId }).del();
   }
-  static async updateById(dataId, data) {
-    return db(StaffModel.getTableName())
-      .where({ id: dataId })
-      .update(data)
-      .returning("*");
+  
+  static async update(staffId, staffData) {
+    try {
+      // Mettre à jour la revue dans la base de données
+      await StaffModel
+        .query()
+        .patchAndFetchById(staffId, staffData) // Mettre à jour et récupérer la revue modifiée
+        .withGraphFetched("[user, shop]"); // Charger les relations users et shops
+
+      // Récupérer la revue mise à jour avec les relations
+      const updatedStaff = await StaffModel
+        .query()
+        .findById(staffId)
+        .withGraphFetched("[user, shop]"); // Charger les relations users et shops
+        console.log('debut',updatedStaff);
+      // Retourner la revue mise à jour avec ses relations
+      return {
+        message: "Staff updated successfully.",
+        data: updatedStaff,
+      };
+    } catch (error) {
+      console.error("Error updating Staff:", error.message);
+      console.error("Stack trace:", error.stack);
+      throw new Error("An error occurred while updating the staff");
+    }
   }
 }
 module.exports = StaffRepository;

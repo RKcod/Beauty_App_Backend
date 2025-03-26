@@ -5,6 +5,7 @@ module.exports = class DeleteStaffController {
     try {
       const { id } = req.params;
       const staff = await findStaffByIdUseCase.findStaff(id);
+      console.log('yo',staff);
       const staffsFormatted = getStaffsResource.toResource(staff);
 
       return res

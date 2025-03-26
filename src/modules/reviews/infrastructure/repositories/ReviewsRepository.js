@@ -61,7 +61,7 @@ module.exports = class ReviewsRepository {
         .query()
         .findById(reviewId)
         .withGraphFetched("[users, shops]"); // Charger les relations users et shops
-        console.log('debut',updatedReview);
+      
       // Retourner la revue mise à jour avec ses relations
       return {
         message: "Review updated successfully.",
@@ -73,10 +73,5 @@ module.exports = class ReviewsRepository {
       throw new Error("An error occurred while updating the review");
     }
   }
-  // static async updateById(dataId, data) {
-  //   return db(reviewsModel.getTableName())
-  //     .where({ id: dataId })
-  //     .update(data)
-  //     .returning("*");
-  // }
+ 
 };

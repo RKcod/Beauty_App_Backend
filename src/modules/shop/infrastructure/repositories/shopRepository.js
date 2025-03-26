@@ -44,11 +44,36 @@ class ShopRepository {
   /**
    * Mettre à jour une boutique par son ID
    */
-  static async updateById(shopId, shopData) {
-    return db(ShopModel.getTableName())
-      .where({ id: shopId })
-      .update(shopData)
-      .returning("*");
+  // static async updateById(shopId, shopData) {
+  //   return db(ShopModel.getTableName())
+  //     .where({ id: shopId })
+  //     .update(shopData)
+  //     .returning("*");
+  // }
+  static async update(shopId, shopData) {
+    try {
+      // Mettre à jour la revue dans la base de données
+      await ShopModel
+        .query()
+        .patchAndFetchById(shopId, shopData) // Mettre à jour et récupérer la revue modifiée
+        .withGraphFetched("[users]"); // Charger les relations users et shops
+
+      // Récupérer la revue mise à jour avec les relations
+      const updatedShop = await ShopModel
+        .query()
+        .findById(shopId)
+        .withGraphFetched("[users]"); // Charger les relations users et shops
+      
+      // Retourner la revue mise à jour avec ses relations
+      return {
+        message: "Review updated successfully.",
+        data: updatedShop,
+      };
+    } catch (error) {
+      console.error("Error updating review:", error.message);
+      console.error("Stack trace:", error.stack);
+      throw new Error("An error occurred while updating the review");
+    }
   }
 
   /**

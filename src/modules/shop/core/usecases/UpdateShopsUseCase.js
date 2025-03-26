@@ -6,7 +6,7 @@ module.exports = class UpdateShopUseCase {
     if (!shop) {
       throw new Error("This shop id does not exist");
     }
-    const updateShopdata = await ShopRepository.updateById(id, data);
+    const updateShopdata = await ShopRepository.update(id, data);
     return updateShopdata;
   }
 };

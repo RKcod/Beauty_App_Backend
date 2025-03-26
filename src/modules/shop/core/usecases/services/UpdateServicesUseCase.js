@@ -11,7 +11,7 @@ module.exports = class UpdateServiceUseCase {
     }
     const serviceFormated = new ServiceEntitie(data);
 
-    const updatedService = await ServiceRepository.updateById(id, serviceFormated);
+    const updatedService = await ServiceRepository.update(id, serviceFormated);
 
     return updatedService;
   }    

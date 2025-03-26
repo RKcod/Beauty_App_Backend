@@ -1,6 +1,6 @@
 module.exports = class GetStaffsResource {
   static toResource(staff) {
-    console.log(staff); // Ajoute ce log pour vérifier la structure des données
+    console.log('top',staff); // Ajoute ce log pour vérifier la structure des données
     return {
       id: staff.id,
       role: staff.role,
@@ -9,24 +9,24 @@ module.exports = class GetStaffsResource {
       user_id: staff.user_id,
       shop_id: staff.shop_id,
 
-      users: Array.isArray(staff.users)
-        ? staff.users.map((user) => ({
-            id: user.id,
-            username: user.username,
-            email: user.email,
-            phone: user.phone,
-            user_type: user.user_type,
-          }))
-        : [],
-      shops: Array.isArray(staff.shops)
-        ? staff.shops.map((shop) => ({
-            id: shop.id,
-            name: shop.name,
-          }))
-        : [],
+      users: staff.user
+        ? {
+            id: staff.user.id,
+            username: staff.user.username,
+            email: staff.user.email,
+            phone: staff.user.phone,
+            user_type: staff.user.user_type,
+          }
+        : null,
+      shops: staff.shop
+        ? {
+            id: staff.shop.id,
+            name: staff.shop.name,
+          }
+        : null,
     };
   }
-
+  
   static collection(staffs) {
     return staffs.map((staff) => this.toResource(staff));
   }

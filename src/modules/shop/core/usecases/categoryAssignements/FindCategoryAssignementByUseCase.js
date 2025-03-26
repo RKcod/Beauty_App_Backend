@@ -3,9 +3,10 @@ const CategoryAssignementRepository = require("../../../infrastructure/repositor
 module.exports = class FindCategoryAssignementByUseCase {
   // 🔹 Créer une catégorie
   static async findCategoryAssignement(id) {
-    if (!id) {
-      throw new Error("This service category id does not exist");
+   const  CategoryAssignement = await CategoryAssignementRepository.findById(id);
+    if (!CategoryAssignement) {
+      throw new Error("This  category assign id does not exist");
     }
-    return await CategoryAssignementRepository.findById(id);
+     return CategoryAssignement;
   }
 };

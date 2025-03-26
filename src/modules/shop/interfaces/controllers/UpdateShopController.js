@@ -7,11 +7,11 @@ module.exports = class UpdateShopController {
 
       const updatedShop = await UpdateShopUseCase.updateShop(id, req.body);
 
-      const Shop = updatedShop[0];
+      const Shop = updatedShop;
 
       return res.status(201).json({
         message: " Service updated successfully",
-        data: GetShopsResource.toResource(Shop),
+        data: Shop,
       });
     } catch (error) {
       return res.status(400).json({ error: error.message });

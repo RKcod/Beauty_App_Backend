@@ -7,11 +7,11 @@ module.exports = class UpdateStaffController {
 
       const updatedStaff = await updateStaffUseCase.updateStaff(id, req.body);
 
-      const Staff = updatedStaff[0];
+      const Staff = updatedStaff;
 
       return res.status(201).json({
         message: " Staff updated successfully.",
-        data: getStaffsResource.toResource(Staff),
+        data: Staff,
       });
     } catch (error) {
       return res.status(400).json({ error: error.message });

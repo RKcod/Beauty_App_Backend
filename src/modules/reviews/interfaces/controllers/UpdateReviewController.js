@@ -6,9 +6,9 @@ module.exports = class UpdateReviewController {
         const { id } = req.params;
   
         const updateReview = await updateReviewUseCase.updateReview(id, req.body);
-        console.log('ppp',updateReview);
+        
         const review = updateReview;
-        console.log('top',review);
+        
     
         return res.status(201).json({
           message: " review updated successfully.",

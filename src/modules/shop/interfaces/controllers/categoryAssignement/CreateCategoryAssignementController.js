@@ -11,7 +11,7 @@ module.exports = class CreateCategoryAssignementController {
       );
       console.log("🔥 Service Category brut :", service);
 
-      const categoryAssignementFormatted = getCategoryAssignementResource.collection(service);
+      const categoryAssignementFormatted = getCategoryAssignementResource.toResource(service);
       return res
         .status(201)
         .json({
