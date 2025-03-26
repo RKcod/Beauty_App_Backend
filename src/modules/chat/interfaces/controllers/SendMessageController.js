@@ -3,12 +3,11 @@ const SendMessageUseCase = require("../../../chat/core/usecases/SendMessageUseCa
 module.exports = class SendMessageController {
   static async handle(req, res) {
     try {
-      const { conversationId, content, attachments } = req.body;
-      const senderId = req.user.id;
+      const { conversation_id, content, attachments, sender_id } = req.body;
 
       const message = await SendMessageUseCase.sendMessage({
-        conversationId,
-        senderId,
+        conversation_id,
+        sender_id,
         content,
         attachments,
       });

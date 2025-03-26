@@ -5,15 +5,16 @@ const paginationProvider = require("../../../../providers/PaginationProvider");
 
 class MessageRepository {
   static async createMessage(messageData) {
+    console.log('my data', messageData)
     const messageEntity = new Message(messageData);
     const message = await MessageModel.query().insertAndFetch(messageEntity);
 
-    if (attachments.length > 0) {
-      await message.$relatedQuery("attachments").insert(attachments);
+    if (messageData.attachments.length > 0) {
+      await message.$relatedQuery("attachments").insert(messageData.attachments);
     }
 
     await ConversationModel.query()
-      .findById(conversationId)
+      .findById(messageData.conversation_id)
       .patch({ last_message_id: message.id, updated_at: new Date() });
 
     return message;

@@ -4,7 +4,7 @@ const WebSocketService = require("../../../../shared/WebSocketService");
 
 module.exports = class SendMessageUseCase {
   static async sendMessage(messageData) {
-    const conversation = await ConversationRepository.getConversationById(messageData.conversationId);
+    const conversation = await ConversationRepository.getConversationById(messageData.conversation_id);
     if (!conversation) {
       throw new Error("Conversation not found");
     }

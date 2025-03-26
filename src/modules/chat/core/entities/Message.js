@@ -26,7 +26,7 @@ class Message {
     if (!this.sender_id) {
       throw new Error("Sender ID is required.");
     }
-    if (!this.content || this.attachments.length === 0) {
+    if (!this.content && this.attachments.length === 0) {
       throw new Error("Message must contain text or at least one attachment.");
     }
   }
