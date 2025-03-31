@@ -10,14 +10,14 @@ const DeleteConversationController = require("../controllers/DeleteConversationC
 const DeleteMessageController = require("../controllers/DeleteMessageController");
 const UpdateMessageController = require("../controllers/UpdateMessageController");
 
-router.post("/conversation", authMiddleware, CreateConversationController.handle);
-router.post("/message", authMiddleware, SendMessageController.handle);
-router.get("/conversations/:userId", authMiddleware, GetUserConversationsController.handle);
-router.get("/conversation/messages", authMiddleware, GetConversationMessagesController.handle);
+router.post("/chat/conversation", authMiddleware, CreateConversationController.handle);
+router.post("/chat/message", authMiddleware, SendMessageController.handle);
+router.get("/chat/conversations/:userId", authMiddleware, GetUserConversationsController.handle);
+router.get("/chat/conversation/messages", authMiddleware, GetConversationMessagesController.handle);
 
-router.put("/message/:messageId", authMiddleware, UpdateMessageController.handle)
-router.patch("/conversation/:conversationId/read", authMiddleware, MarkMessagesAsReadController.handle);
-router.delete("/conversation/:conversationId", authMiddleware, DeleteConversationController.handle);
-router.delete("/message/:messageId", authMiddleware, DeleteMessageController.handle);
+router.put("/chat/message/:messageId", authMiddleware, UpdateMessageController.handle)
+router.patch("/chat/conversation/:conversationId/read", authMiddleware, MarkMessagesAsReadController.handle);
+router.delete("/chat/conversation/:conversationId", authMiddleware, DeleteConversationController.handle);
+router.delete("/chat/message/:messageId", authMiddleware, DeleteMessageController.handle);
 
 module.exports = router;
