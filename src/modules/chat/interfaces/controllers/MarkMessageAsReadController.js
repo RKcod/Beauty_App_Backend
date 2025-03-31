@@ -4,7 +4,7 @@ module.exports = class MarkMessagesAsReadController {
   static async handle(req, res) {
     try {
       const { conversationId } = req.params;
-      const userId = req.user.id;
+      const userId = req.body.user_id;
 
       await MarkMessagesAsReadUseCase.markMessagesAsRead(conversationId, userId);
 

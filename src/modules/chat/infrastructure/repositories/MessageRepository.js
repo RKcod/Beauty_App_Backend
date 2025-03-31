@@ -9,7 +9,9 @@ class MessageRepository {
     const message = await MessageModel.query().insertAndFetch(messageEntity);
 
     if (messageData.attachments.length > 0) {
-      await message.$relatedQuery("attachments").insert(messageData.attachments);
+      await message
+        .$relatedQuery("attachments")
+        .insert(messageData.attachments);
     }
 
     await ConversationModel.query()
@@ -19,7 +21,11 @@ class MessageRepository {
     return message;
   }
 
-  static async getMessagesByConversation(conversationPaginateFilter, page, perPage) {
+  static async getMessagesByConversation(
+    conversationPaginateFilter,
+    page,
+    perPage
+  ) {
     let query = ConversationModel.query()
       .withGraphFetched("messages.sender")
       .orderBy("created_at", "desc");
@@ -34,6 +40,28 @@ class MessageRepository {
       .where("conversation_id", conversationId)
       .whereNot("sender_id", userId)
       .patch({ is_read: true, updated_at: new Date() });
+  }
+
+  static async findMessage(messageId) {
+    return await MessageModel.query().findById(messageId);
+  }
+
+  static async deleteById(messageId) {
+    return await MessageModel.query().deleteById(messageId);
+  }
+
+  static async updateById(messageId, data) {
+    const existingMessage = await MessageModel.query().findById(messageId);
+    if (!existingMessage) {
+      throw new Error(`Message with ID ${messageId} not found`);
+    }
+
+    // Met à jour le message
+    await MessageModel.query().findById(messageId).patch(data);
+
+    return await MessageModel.query()
+      .findById(messageId)
+      .withGraphFetched("[sender, attachments]");
   }
 }
 

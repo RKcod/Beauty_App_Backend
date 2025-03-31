@@ -1,3 +1,4 @@
+const { deleteById } = require("../../../user/infrastructure/repositories/UserRepository");
 const ConversationModel = require("../models/ConversationModel");
 
 class ConversationRepository {
@@ -41,6 +42,14 @@ class ConversationRepository {
     return ConversationModel.query()
       .findById(conversationId)
       .withGraphFetched("[shop, messages.sender]");
+  }
+
+  static async deleteById(conversationId){
+    return await ConversationModel.query().deleteById(conversationId);
+  }
+
+  static async findConversationById(conversationId){
+    return await ConversationModel.query().findById(conversationId);
   }
 }
 
