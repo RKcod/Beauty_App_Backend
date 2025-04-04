@@ -1,5 +1,5 @@
 const BaseModel = require("../../../../shared/BaseModel");
-const shopModel = require("../../../shop/infrastructure/models/ShopModel"); // Assure-toi de bien importer ShopModel
+const shopModel = require("./ShopModel"); // Assure-toi de bien importer ShopModel
 const userModel = require("../../../user/infrastructure/models/UserModel");
 
 class StaffModel extends BaseModel {
