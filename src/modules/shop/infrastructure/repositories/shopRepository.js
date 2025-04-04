@@ -53,17 +53,15 @@ class ShopRepository {
   static async update(shopId, shopData) {
     try {
       // Mettre à jour la revue dans la base de données
-      await ShopModel
-        .query()
+      await ShopModel.query()
         .patchAndFetchById(shopId, shopData) // Mettre à jour et récupérer la revue modifiée
         .withGraphFetched("[users]"); // Charger les relations users et shops
 
       // Récupérer la revue mise à jour avec les relations
-      const updatedShop = await ShopModel
-        .query()
+      const updatedShop = await ShopModel.query()
         .findById(shopId)
         .withGraphFetched("[users]"); // Charger les relations users et shops
-      
+
       // Retourner la revue mise à jour avec ses relations
       return {
         message: "Review updated successfully.",
