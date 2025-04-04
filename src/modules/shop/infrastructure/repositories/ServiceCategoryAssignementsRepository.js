@@ -1,4 +1,5 @@
 const ServiceCategoryAssignementsModel = require("../models/ServiceCategoryAssignementsModel");
+const ServiceCategoryModel = require("../models/ServiceCategoryModel");
 const db = require("../../../../../knexInstance");
 const paginationProvider = require("../../../../providers/PaginationProvider");
 
@@ -32,9 +33,9 @@ class ServiceCategoryAssignementRepository {
   }
 
   static async getAll(dataPaginateFilter, page, perPage) {
-    let query = ServiceCategoryAssignementsModel.query()
+    let query = ServiceCategoryModel.query()
       .select("*")
-      .withGraphFetched("[service,category]");
+      .withGraphFetched("services");
 
     query = dataPaginateFilter.applyFilters(query);
 
@@ -47,10 +48,10 @@ class ServiceCategoryAssignementRepository {
   //     .withGraphFetched("[service, category]").first(); // Charger les relations
   // }
   static async findById(dataId) {
-    const review = await ServiceCategoryAssignementsModel
+    const review = await ServiceCategoryModel
       .query()
       .findById(dataId)
-      .withGraphFetched("[service, category]");
+      .withGraphFetched("services");
     return review;
   }
 

@@ -13,6 +13,8 @@ module.exports = class GetCategoryAssignementController {
         req.query.page || 1,
         15
       );
+
+      console.log("categories",data);
       const dataFormatted = getCategoryAssignementResource.collection(
         data.data
       );
