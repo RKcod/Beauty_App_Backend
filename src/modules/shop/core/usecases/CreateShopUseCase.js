@@ -1,8 +1,11 @@
+
 const Helpers = require("../../../../shared/Helpers");
 const UserRepository = require("../../../user/infrastructure/repositories/UserRepository");
 const PasswordService = require("../../../user/infrastructure/services/PasswordService");
 const ShopRepository = require("../../infrastructure/repositories/ShopRepository");
 const Shop = require("../entities/Shop");
+const path = require("path");
+const fs = require("fs");
 
 module.exports = class CreateShopUseCase {
   static async createShop(shopData) {
@@ -30,9 +33,16 @@ module.exports = class CreateShopUseCase {
         "register"
       );
     }
+     // Déterminer l’image à utiliser (upload ou image par défaut)
+    
 
-    const shop = new Shop(shopData);
+     const shop = new Shop({
+      ...shopData,
+      owner_id: userCreated[0].id,
+      image: shopData.image || "/uploads/default-shop.png", // Ajout de l'image par défaut ici
+    });
 
+  
     shop.owner_id = userCreated[0].id;
 
     const shopChecked = await ShopRepository.findByEmail(email);

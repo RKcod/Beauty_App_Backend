@@ -1,4 +1,5 @@
 const express = require("express");
+const upload = require("../../../user/interfaces/middlewares/multerMiddleware"); // Ajout de l'upload
 
 const router = express.Router();
 
@@ -18,4 +19,9 @@ router.get("/services", authMiddleware, getServiceController.getAll);
 router.get("/service/:id", authMiddleware, findServiceController.find);
 router.delete("/service/:id", authMiddleware, deleteServiceController.delete);
 router.put('/service/:id', authMiddleware, updateServiceController.update);
+// Modifier la route pour gérer l'upload
+router.post("/service", authMiddleware, upload.single("image"), createServiceController.create);
+// Route de mise à jour d'un shop (avec upload d'image)
+router.put("/service/:id", authMiddleware, upload.single("image"), updateServiceController.update);
+
 module.exports = router;

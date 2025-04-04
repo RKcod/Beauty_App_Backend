@@ -4,6 +4,10 @@ module.exports = class UpdateShopController {
   static async update(req, res) {
     try {
       const { id } = req.params;
+       // Vérifier si une nouvelle image a été uploadée
+       if (req.file) {
+        shopData.image = `/uploads/${req.file.filename}`;
+      }
 
       const updatedShop = await UpdateShopUseCase.updateShop(id, req.body);
 

@@ -7,12 +7,14 @@ module.exports = class Service {
     duration,
     created_at,
     update_at,
+    image
   }) {
     this.shop_id = shop_id;
     this.name = name;
     this.description = description;
     this.price = price;
     this.duration = duration;
+    this.image = image || null;
     this.created_at = created_at || new Date();
     this.update_at = update_at || new Date();
   }

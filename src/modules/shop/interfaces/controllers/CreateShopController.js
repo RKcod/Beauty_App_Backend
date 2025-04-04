@@ -6,6 +6,10 @@ module.exports = class CreateShopController {
     const shopData = req.body;
 
     try {
+       // Vérifie si un fichier a été uploadé et ajoute son chemin
+       if (req.file) {
+        shopData.image = `/uploads/${req.file.filename}`;
+      }
       const shop = await createShopUseCase.createShop(shopData);
       const shopFormatted = getShopsResource.toResource (shop);
       return res

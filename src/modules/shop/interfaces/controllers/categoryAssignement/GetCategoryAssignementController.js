@@ -8,11 +8,13 @@ module.exports = class GetCategoryAssignementController {
       const dataPaginateFilter = new serviceCategoryAssignementPaginateFilter(
         req.query
       );
+     
       const data = await getCategoryAssignementUseCase.getCategoryAssignement(
         dataPaginateFilter,
         req.query.page || 1,
         15
       );
+     
       const dataFormatted = getCategoryAssignementResource.collection(
         data.data
       );

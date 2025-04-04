@@ -12,8 +12,12 @@ module.exports = class CreateServiceUseCase {
     if (!shopId) {
       throw new Error("this shop id does exist");
     }
+    const serviceFormated = new ServiceEntitie({
+      ...shopData,
+      image: serviceData.image || "/uploads/default-shop.png", // Ajout de l'image par défaut ici
+    });
 
-    const serviceFormated = new ServiceEntitie(serviceData);
+    // const serviceFormated = new ServiceEntitie(serviceData);
 
     return await ServiceRepository.create(serviceFormated);
   }

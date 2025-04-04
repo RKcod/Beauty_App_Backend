@@ -5,6 +5,9 @@ module.exports = class CreateServiceController {
     const serviceData = req.body;
 
     try {
+      if (req.file) {
+        serviceData.image = `/uploads/${req.file.filename}`;
+      }
       const service = await createServiceUseCase.createService(serviceData);
       const servicesFormatted = getServicesResource.toResource(service);
       return res

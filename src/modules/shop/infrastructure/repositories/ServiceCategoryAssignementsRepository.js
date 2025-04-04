@@ -31,21 +31,53 @@ class ServiceCategoryAssignementRepository {
     }
   }
 
+  // static async getAll(dataPaginateFilter, page, perPage) {
+  //   let query = ServiceCategoryAssignementsModel.query()
+  //     .select("*")
+  //     .withGraphFetched("[service,category]");
+
+  //   query = dataPaginateFilter.applyFilters(query);
+
+  //   return paginationProvider.paginate(query, page, perPage);
+  // }
   static async getAll(dataPaginateFilter, page, perPage) {
     let query = ServiceCategoryAssignementsModel.query()
-      .select("*")
-      .withGraphFetched("[service,category]");
+        .select("*")
+        .withGraphFetched("[service, category]");
 
     query = dataPaginateFilter.applyFilters(query);
 
-    return paginationProvider.paginate(query, page, perPage);
-  }
+    const paginatedResult = await paginationProvider.paginate(query, page, perPage);
 
-  // static async findById(dataId) {
-  //   return await ServiceCategoryAssignementsModel.query()
-  //   .where("id", dataId) // Utiliser `findById` au lieu de `where({ id: dataId })`
-  //     .withGraphFetched("[service, category]").first(); // Charger les relations
-  // }
+    // Regrouper les services par catégorie
+    const groupedByCategory = paginatedResult.data.reduce((acc, item) => {
+        const categoryId = item.category.id;
+
+        // Vérifie si la catégorie existe déjà dans l'objet regroupé
+        if (!acc[categoryId]) {
+            acc[categoryId] = {
+                category: item.category,
+                services: []
+            };
+        }
+
+        // Vérifie si le service est déjà ajouté (éviter les doublons)
+        if (!acc[categoryId].services.some(service => service.id === item.service.id)) {
+            acc[categoryId].services.push(item.service);
+        }
+
+        return acc;
+    }, {});
+
+    // Retourner le format attendu
+    return {
+        ...paginatedResult,
+        data: Object.values(groupedByCategory)
+    };
+}
+
+  
+  
   static async findById(dataId) {
     const review = await ServiceCategoryAssignementsModel
       .query()
