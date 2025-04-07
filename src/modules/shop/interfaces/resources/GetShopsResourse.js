@@ -7,6 +7,7 @@ module.exports = class GetShopsResource {
       address: shop.address,
       city: shop.city,
       phone: shop.phone,
+      image: shop.image,
       activity_domain: shop.activity_domain,
       created_at: shop.created_at,
       updated_at: shop.updated_at,

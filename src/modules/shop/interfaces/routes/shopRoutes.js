@@ -12,11 +12,11 @@ const updateShopController = require("../controllers/UpdateShopController");
 
 // routers shop
 
-router.post("/shop/create", authMiddleware, createShopController.create);
+// router.post("/shop/create", authMiddleware, createShopController.create);
 router.get("/shop/all", authMiddleware, getShopsController.getAll);
 router.get("/shop/:id", authMiddleware, findShopByIdController.find);
 router.delete("/shop/:id", authMiddleware, deleteShopController.delete);
-router.put("/shop/:id", authMiddleware, updateShopController.update);
+// router.put("/shop/:id", authMiddleware, updateShopController.update);
 // Modifier la route pour gérer l'upload
 router.post("/shop/create", authMiddleware, upload.single("image"), createShopController.create);
 // Route de mise à jour d'un shop (avec upload d'image)

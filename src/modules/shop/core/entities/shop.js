@@ -1,11 +1,12 @@
 
 class Shop {
-  constructor({ name, email, phone, address, city, activity_domain, owner_id, created_at, updated_at }) {
+  constructor({ name, email, phone, address, city,image, activity_domain, owner_id, created_at, updated_at }) {
     this.name = name;
     this.email = email;
     this.phone = phone;
     this.address = address;
     this.city = city;
+    this.image = image;
     this.activity_domain = activity_domain;
     this.owner_id = owner_id;
     this.created_at = created_at || new Date();

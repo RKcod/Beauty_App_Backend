@@ -10,13 +10,11 @@ const fs = require("fs");
 module.exports = class CreateShopUseCase {
   static async createShop(shopData) {
     const { email, phone, name } = shopData;
-
     const user = await UserRepository.findByEmail(email);
 
     if (user) {
       throw new Error("This User already exists");
     }
-
     const userPassword = await PasswordService.generateTemporaryPassword();
     let userPasswordHash = await PasswordService.hashPassword(userPassword);
     const userCreated = await UserRepository.create({
@@ -34,15 +32,12 @@ module.exports = class CreateShopUseCase {
       );
     }
      // Déterminer l’image à utiliser (upload ou image par défaut)
-    
-
      const shop = new Shop({
       ...shopData,
       owner_id: userCreated[0].id,
-      image: shopData.image || "/uploads/default-shop.png", // Ajout de l'image par défaut ici
+      image: shopData.image
     });
 
-  
     shop.owner_id = userCreated[0].id;
 
     const shopChecked = await ShopRepository.findByEmail(email);

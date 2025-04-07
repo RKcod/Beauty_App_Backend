@@ -6,7 +6,8 @@ module.exports = class UpdateServiceController {
       const { id } = req.params;
        // Vérifier si une nouvelle image a été uploadée
        if (req.file) {
-        shopData.image = `/uploads/${req.file.filename}`;
+        req.body.image = `/uploads/${req.file.filename}`;
+        
       }
 
       const updatedService = await UpdateServiceUseCase.updateService(id, req.body);

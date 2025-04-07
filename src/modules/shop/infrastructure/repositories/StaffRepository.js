@@ -5,36 +5,44 @@ class StaffRepository {
   /**
    * Créer un staff
    */
+  
   static async create(staffData) {
     try {
-      // Insérer le staff dans la base de données
+        // Insérer le staff dans la base de données
       const [staff] = await db(StaffModel.getTableName())
         .insert(staffData)
         .returning("*");
-
-      // Récupérer la revue avec les relations (users et shops)
+  
+      if (!staff) {
+        throw new Error("Staff creation failed, no data returned");
+      }
+  
+      console.log('Staff created:', staff);
+  
+      // Récupérer le staff avec ses relations (shop, etc.)
       const staffWithRelations = await StaffModel
         .query()
         .findById(staff.id)
-        .withGraphFetched("[user, shop]"); // Charger les relations users et shops
-
-
-      // Récupérer le staff sans les relations (juste pour tester)
+        .withGraphFetched("shop");
+    
+      // Retourner le staff avec les relations
       return staffWithRelations;
+  
     } catch (error) {
       console.error("Error creating staff:", error.message);
       console.error("Stack trace:", error.stack);
-      throw new Error("An error occurred while creating the staff");
+      return res.status(400).json({ message: error.message });
     }
   }
-
+  
+  
   /**
    * Récupérer tout un staff avec pagination
    */
   static async getAll(staffPaginateFilter, page, perPage) {
     let query = StaffModel.query()
       .select("*")
-      .withGraphFetched("[user, shop]");
+      .withGraphFetched("shop");
 
     query = staffPaginateFilter.applyFilters(query);
     
@@ -49,7 +57,7 @@ class StaffRepository {
     const review = await StaffModel
     .query()
     .findById(staffId)
-    .withGraphFetched("[user, shop]");
+    .withGraphFetched("shop");
     return review;
 
   }
@@ -62,7 +70,7 @@ class StaffRepository {
     const staff = await StaffModel
       .query()
       .findById(userId)
-      .withGraphFetched("[user, shop]");
+      .withGraphFetched("shop");
     return staff;
   }
 
@@ -79,13 +87,13 @@ class StaffRepository {
       await StaffModel
         .query()
         .patchAndFetchById(staffId, staffData) // Mettre à jour et récupérer la revue modifiée
-        .withGraphFetched("[user, shop]"); // Charger les relations users et shops
+        .withGraphFetched("shop"); // Charger les relations users et shops
 
       // Récupérer la revue mise à jour avec les relations
       const updatedStaff = await StaffModel
         .query()
         .findById(staffId)
-        .withGraphFetched("[user, shop]"); // Charger les relations users et shops
+        .withGraphFetched("shop"); // Charger les relations users et shops
         console.log('debut',updatedStaff);
       // Retourner la revue mise à jour avec ses relations
       return {

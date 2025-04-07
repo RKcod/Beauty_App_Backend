@@ -7,6 +7,7 @@ module.exports = class GetServicesResource {
       price: service.price,
       duration: service.duration,
       shop:  service.shop_id,
+      image:  service.image,
       shops: Array.isArray(service.shops) 
         ? service.shops.map((shop) => ({
             id: shop.id,

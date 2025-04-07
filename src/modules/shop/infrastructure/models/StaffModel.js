@@ -8,7 +8,6 @@ class StaffModel extends BaseModel {
   }
   static get relationMappings() {
     return {
-      user: this.belongsTo(userModel, "staffs.user_id", "users.id"),
       shop: this.belongsTo(shopModel, "staffs.shop_id", "shops.id"),
     };
   }
