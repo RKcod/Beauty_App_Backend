@@ -1,12 +1,15 @@
 const getServicesResource = require("../../resources/GetservicesResource");
 const createServiceUseCase = require("../../../core/usecases/services/CreateServiceUseCase");
+const ImageUploadService = require("../../../../user/infrastructure/services/ImageUploadService");
+
 module.exports = class CreateServiceController {
   static async create(req, res) {
     const serviceData = req.body;
 
     try {
       if (req.file) {
-        serviceData.image = `/uploads/${req.file.filename}`;
+        ImageUploadService.validateImage(req.file);
+        serviceData.image = req.file.filename;
       }
       const service = await createServiceUseCase.createService(serviceData);
       const servicesFormatted = getServicesResource.toResource(service);

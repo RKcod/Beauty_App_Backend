@@ -1,5 +1,7 @@
 const createShopUseCase = require("../../core/usecases/CreateShopUseCase");
 const getShopsResource = require("../resources/GetShopsResourse");
+const ImageUploadService = require("../../../user/infrastructure/services/ImageUploadService");
+
 
 module.exports = class CreateShopController {
   static async create(req, res) {
@@ -8,7 +10,8 @@ module.exports = class CreateShopController {
     try {
        // Vérifie si un fichier a été uploadé et ajoute son chemin
        if (req.file) {
-        shopData.image = `/uploads/${req.file.filename}`;
+        ImageUploadService.validateImage(req.file);
+        shopData.image = req.file.filename;
       }
       const shop = await createShopUseCase.createShop(shopData);
       const shopFormatted = getShopsResource.toResource (shop);

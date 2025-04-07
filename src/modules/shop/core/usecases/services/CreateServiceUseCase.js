@@ -14,7 +14,6 @@ module.exports = class CreateServiceUseCase {
     }
     const serviceFormated = new ServiceEntitie({
       ...serviceData,
-      image: serviceData.image || "/uploads/default-shop.png", // Ajout de l'image par défaut ici
     });
 
     // const serviceFormated = new ServiceEntitie(serviceData);

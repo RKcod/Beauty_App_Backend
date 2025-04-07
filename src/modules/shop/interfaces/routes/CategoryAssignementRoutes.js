@@ -15,7 +15,11 @@ const UpdateCategoryAssignementController = require("../controllers/categoryAssi
 router.post("/categoryAssign/create", authMiddleware, createCategoryAssignementController.create);
 router.get("/categoryAssign/all", authMiddleware, getCategoryAssignementController.getAll);
 router.get("/categoryAssign/:id", authMiddleware, findCategoryAssignementByIdController.find);
-router.delete("/categoryAssign/:id", authMiddleware, DeleteCategoryAssignementController.delete);
-router.put('/categoryAssign/:id', authMiddleware, UpdateCategoryAssignementController.update);
+// router.delete("/categoryAssign/:id", authMiddleware, DeleteCategoryAssignementController.delete);
+// router.put('/categoryAssign/:id', authMiddleware, UpdateCategoryAssignementController.update);
+router.delete( "/categoryAssign/:categoryId/:serviceId",authMiddleware,DeleteCategoryAssignementController.remove);
+router.put('/categoryAssign/:categoryId/:serviceId', authMiddleware, UpdateCategoryAssignementController.update);
+
+  
 
 module.exports = router;

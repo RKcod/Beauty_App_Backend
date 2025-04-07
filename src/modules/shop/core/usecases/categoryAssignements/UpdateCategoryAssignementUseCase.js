@@ -10,4 +10,17 @@ module.exports = class UpdateCategoryAssignementUseCase {
       await CategoryAssignementRepository.update(id, data);
     return updatedCategoryAssignement;
   }
+  static async updateServiceId(oldServiceId, categoryId, newServiceId) {
+    const assignment = await CategoryAssignementRepository.findByServiceAndCategory(oldServiceId, categoryId);
+
+    if (!assignment) {
+      throw new Error("This service is not assigned to the given category");
+    }
+
+    const updatedAssignment = await CategoryAssignementRepository.updateServiceId(
+      oldServiceId, categoryId, newServiceId
+    );
+
+    return updatedAssignment;
+  }
 };

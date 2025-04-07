@@ -17,14 +17,6 @@ const serviceRoutes = require("../src/modules/shop/interfaces/routes/serviceRout
 const staffRoutes = require("../src/modules/shop/interfaces/routes/staffRoutes");
 const reviewRoutes = require("../src/modules/reviews/interfaces/routes/reviewRoutes");
 
-const fs = require("fs");
-// const path = require("path");
-const uploadDir = path.join(__dirname, "uploads");
-// Vérifie si le dossier "uploads" existe, sinon le créer
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir);
-  console.log("📂 Dossier 'uploads' créé !");
-}
 
 dotenv.config(); // Charger les variables d'environnement
 
@@ -41,7 +33,7 @@ app.use(morgan("dev"));
 // Pour gérer les requêtes JSON
 app.use(express.json());
 
-// app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.use("/api/v1", [
   userRoutes,

@@ -1,5 +1,7 @@
 const UpdateShopUseCase = require("../../core/usecases/UpdateShopsUseCase");
 const GetShopsResource = require("../resources/GetShopsResourse");
+const ImageUploadService = require("../../../user/infrastructure/services/ImageUploadService");
+
 const path = require("path");
 
 module.exports = class UpdateShopController {
@@ -9,8 +11,9 @@ module.exports = class UpdateShopController {
       const  shopData = { ...req.body };
        // Vérifier si une nouvelle image a été uploadée
        if (req.file) {
-        // shopData.image = `/uploads/${req.file.filename}`;
-        shopData.image = path.join("/uploads", req.file.filename);
+        ImageUploadService.validateImage(req.file);
+        shopData.image = req.file.filename;
+       
       }
 
       const updatedShop = await UpdateShopUseCase.updateShop(id, shopData);

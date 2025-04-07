@@ -10,4 +10,14 @@ module.exports = class DeleteCategoryAssignementUseCase {
     }
     return await CategoryAssignementRepository.deleteById(id);
   }
+  static async removeServiceFromCategory(serviceId, categoryId) {
+    // Vérifier si l'affectation existe
+    const categoryAssign = await CategoryAssignementRepository.findByServiceAndCategory(serviceId, categoryId);
+
+
+    // Supprimer l'affectation
+    await CategoryAssignementRepository.removeServiceFromCategory(serviceId, categoryId);
+
+    return { message: "Service retiré de la catégorie avec succès." };
+  }
 };

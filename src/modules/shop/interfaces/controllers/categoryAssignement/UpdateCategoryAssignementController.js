@@ -3,19 +3,20 @@ const updateCategoryAssignementUseCase = require("../../../core/usecases/categor
 module.exports = class UpdateCategoryAssignementController {
   static async update(req, res) {
     try {
-      const { id } = req.params;
-      // console.log(req.body, id);
-      const updatedCategoryAssignement =
-        await updateCategoryAssignementUseCase.updateCategoryAssignement(
-          id,
-          req.body
-        );
+      const { categoryId, serviceId } = req.params;
+      const { newServiceId } = req.body; // ID du nouveau service
 
-      const CategoryAssignement = updatedCategoryAssignement;
+      if (!categoryId || !serviceId || !newServiceId) {
+        return res.status(400).json({ message: "categoryId, serviceId et newServiceId sont requis." });
+      }
 
+      const updatedAssignment = await updateCategoryAssignementUseCase.updateServiceId(
+        serviceId, categoryId, newServiceId
+      );
+    
       return res.status(201).json({
         message: " Category Assignement updated successfully.",
-        data: CategoryAssignement,
+        data: updatedAssignment,
       });
     } catch (error) {
       return res.status(400).json({ error: error.message });

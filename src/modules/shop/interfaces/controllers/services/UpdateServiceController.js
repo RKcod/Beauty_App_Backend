@@ -1,12 +1,15 @@
 const getServicesResource = require("../../resources/GetservicesResource");
 const UpdateServiceUseCase= require("../../../core/usecases/services/UpdateServicesUseCase");
+const ImageUploadService = require("../../../../user/infrastructure/services/ImageUploadService");
+
 module.exports = class UpdateServiceController {
   static async update(req, res) {
     try {
       const { id } = req.params;
        // Vérifier si une nouvelle image a été uploadée
        if (req.file) {
-        req.body.image = `/uploads/${req.file.filename}`;
+        ImageUploadService.validateImage(req.file);
+        req.body.image = req.file.filename;
         
       }
 
