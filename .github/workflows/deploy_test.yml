@@ -1,0 +1,37 @@
+name: 🚀 Déploiement automatique sur EC2 version test
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout du code
+        uses: actions/checkout@v4
+
+      - name: 📄 Create .env file
+        run: echo "${{ secrets.ENV_TEST }}" > .env
+
+      - name: 🚀 Envoyer les fichiers au serveur EC2
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "."
+          target: "~/api.test.beauty-app"
+
+      - name: 🔧 Déployer l'application via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd ~/api.test.beauty-app
+            docker-compose down
+            docker-compose up -d --build
