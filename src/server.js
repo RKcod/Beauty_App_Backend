@@ -11,6 +11,13 @@ const userRoutes = require("../src/modules/user/interfaces/routes/userRoutes");
 const roleRoutes = require("../src/modules/user/interfaces/routes/roleRoutes");
 const permissionRoutes = require("../src/modules/user/interfaces/routes/permissionRoutes");
 const shopRoutes = require("../src/modules/shop/interfaces/routes/shopRoutes");
+const categoryAssignementRoutes = require("../src/modules/shop/interfaces/routes/CategoryAssignementRoutes");
+const serviceCategoryRoutes = require("../src/modules/shop/interfaces/routes/serviceCategoryRoutes");
+const serviceRoutes = require("../src/modules/shop/interfaces/routes/serviceRoutes");
+const staffRoutes = require("../src/modules/shop/interfaces/routes/staffRoutes");
+const reviewRoutes = require("../src/modules/reviews/interfaces/routes/reviewRoutes");
+
+
 dotenv.config(); // Charger les variables d'environnement
 
 // === MIDDLEWARES ===
@@ -26,9 +33,19 @@ app.use(morgan("dev"));
 // Pour gérer les requêtes JSON
 app.use(express.json());
 
-app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-app.use("/api/v1", [userRoutes, roleRoutes, permissionRoutes, shopRoutes]);
+app.use("/api/v1", [
+  userRoutes,
+  roleRoutes,
+  permissionRoutes,
+  shopRoutes,
+  categoryAssignementRoutes,
+  serviceCategoryRoutes,
+  serviceRoutes,
+  staffRoutes,
+  reviewRoutes
+]);
 // define the route
 app.get("/", (req, res) => {
   res.send(
