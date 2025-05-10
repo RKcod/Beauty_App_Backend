@@ -1,11 +1,13 @@
-const NameFilter = require('./common/NameFilter');
-const PhoneFilter = require('./common/PhoneFilter');
+const NameFilter = require("./common/NameFilter");
+const PhoneFilter = require("./common/PhoneFilter");
+const RoleFilter = require("./common/RoleFilter");
 
 class ShopPaginateFilter {
   constructor(queryParams) {
     this.filters = [
       new NameFilter(queryParams.name),
       new PhoneFilter(queryParams.phone),
+      new RoleFilter(queryParams.role),
     ];
   }
 
